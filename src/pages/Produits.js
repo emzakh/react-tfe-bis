@@ -2,17 +2,16 @@ import React from 'react';
 import Logo from '../components/Logo';
 
 import Navigation from '../components/Navigation';
+import Produits from '../components/Produits';
 
-
-const Home = () =>{
+const Produit = () =>{
     return (
-        <div className="home">
+        <div className="produit">
             <Navigation/>
-            <Logo/>
-            <h1>Salut ! C'est la homepage !</h1>
-        
+            <Logo/>           
+            <Produits/>
         </div>
     )
 }
 
-export default Home
+export default Produit

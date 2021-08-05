@@ -4,7 +4,7 @@ import About from './pages/About';
 import Home from './pages/Home';
 import NotFound from './pages/NotFound';
 import Produits from './pages/Produits';
-import ProduitShow from './components/ProduitShow';
+import ProduitDetail from './components/ProduitDetail';
 
 const App = () => {
   return (
@@ -12,8 +12,8 @@ const App = () => {
       <Switch>
         <Route path="/" exact component={Home} /> 
         <Route path="/a-propos" component={About}/>
-        <Route path="/produits" component={Produits}/>
-        <Route exact path="/produits/:userId" component={ProduitShow} />
+        <Route path="/produits" exact component={Produits}/>
+        <Route path="/produits/:id" component={ProduitDetail} />
         <Route component={NotFound}/>  
         
       </Switch>

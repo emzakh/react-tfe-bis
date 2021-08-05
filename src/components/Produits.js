@@ -1,11 +1,16 @@
 import React, {useState,useEffect} from "react";
 import axios from "axios";
 import Card from "./Card";
+import Pagination from "./Pagination";
 
 const Produits = () => {
   const [data, setData] = useState([]); 
   const [selectedRadio, setSelectedRadio] = useState('');
   const radios = ['Jardin','Epices','Potager'];
+
+//pagination 
+const [currentPage, setCurrentPage] = useState(1)
+
 
   useEffect(() => {
     axios
@@ -16,6 +21,27 @@ const Produits = () => {
       .then(data => setData(data))    
   }, []);
 
+  const handlePageChange = (page) => {
+    setCurrentPage(page)
+}
+
+const itemsPerPage= 12
+
+const filterProduit = data.filter((produit)=> produit.categorie.includes(selectedRadio))
+const paginatedData = Pagination.getData(filterProduit, currentPage, itemsPerPage)
+
+const handleSelectFilter = event => {
+  const value = event.currentTarget.value 
+  setSelectedRadio(value)
+        // mettre à la page 1 pour que la fonction getData fonctionne correctement
+  setCurrentPage(1)
+}
+
+const resetSelectFilter = event => {
+  setSelectedRadio("");
+  setCurrentPage(1)
+}
+
 
   return (
     <div className="produits">
@@ -24,7 +50,7 @@ const Produits = () => {
           {radios.map((radio)=>{
             return(
               <li key={radio}>
-                <input type="radio" value={radio} id={radio} checked={radio === selectedRadio} onChange={(e)=>setSelectedRadio(e.target.value)}/>
+                <input type="radio" value={radio} id={radio} checked={radio === selectedRadio} onChange={handleSelectFilter}/>
                 <label htmlFor={radio}>{radio}</label>
               </li>
             )
@@ -32,16 +58,27 @@ const Produits = () => {
         </ul>
       </div>
       <div className="cancel">
-        {selectedRadio && <h5 onClick={()=>setSelectedRadio("")}>Annuler filtre</h5>}
+        {selectedRadio && <h5 onClick={resetSelectFilter}>Annuler filtre</h5>}
       </div>
         <ul className="produits-list">
             {
-            data
-            .filter((produit)=> produit.categorie.includes(selectedRadio))
+           paginatedData
             .map((produit)=>(
-              <Card produit={produit} key={produit.nom}/>
+              <Card produit={produit} key={produit.nom}
+              />
+              
             ))}
         </ul>
+
+        { itemsPerPage < filterProduit.length && 
+                <Pagination 
+                currentPage={currentPage}
+                itemsPerPage={itemsPerPage}
+                length={filterProduit.length}
+                onPageChanged={handlePageChange}
+                />
+            }
+
 
     </div>
     );

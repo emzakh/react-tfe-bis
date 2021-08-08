@@ -4,6 +4,8 @@ import About from './pages/About';
 import Home from './pages/Home';
 import NotFound from './pages/NotFound';
 import Produits from './pages/Produits';
+import Recettes from './pages/Recettes';
+
 import ProduitDetail from './components/ProduitDetail';
 
 const App = () => {
@@ -13,6 +15,7 @@ const App = () => {
         <Route path="/" exact component={Home} /> 
         <Route path="/a-propos" component={About}/>
         <Route path="/produits" exact component={Produits}/>
+        <Route path="/recettes" exact component={Recettes}/>
         <Route path="/produits/:id" component={ProduitDetail} />
         <Route component={NotFound}/>  
         

@@ -1,0 +1,51 @@
+.pagination{
+    display:flex;
+    justify-content: center;
+    font-family:$font-1;
+    margin-top:1rem;   
+
+    .disabled{
+        display:none;
+    }  
+
+
+    .active{
+        background-color: red;;
+    }
+
+
+    button{       
+        display:flex;
+        justify-content: center;     
+        border:none;
+        font-family:$font-1;  
+        background-color:$color-2;
+        cursor:pointer;      
+        width:1.3rem;    
+        padding-left: 1rem;
+        padding-right:1rem;
+        padding-top:0.4rem;
+        padding-bottom:0.4rem;  
+        transition: 0.3s;
+        border-radius: 4px;
+     
+ 
+      
+        &:hover{
+         background-color:$color-3;
+         transition: 0.6s;
+         border-radius: 4px;
+ 
+         h4{
+             color:$color-5;  
+         }
+        }
+
+     
+ 
+        h4{
+            font-size:1.3rem;
+            font-weight:lighter;
+        }
+    }
+}

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Card from "./Card";
+import CardRecette from "./CardRecette";
 import Pagination from "./Pagination";
 
-const Produits = () => {
+const Recettes = () => {
   const [data, setData] = useState([]);
   const [selectedRadio, setSelectedRadio] = useState("");
-  const radios = ["Jardin", "Epices", "Potager"];
+  const radios = ["Plat", "Boisson", "Dessert"];
 
   //pagination
   const [currentPage, setCurrentPage] = useState(1);
@@ -16,7 +16,7 @@ const Produits = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/produits")
+      .get("http://localhost:8000/api/recettes")
       .then((res) => res.data["hydra:member"])
       .then((data) => setData(data));
   }, []);
@@ -27,8 +27,8 @@ const Produits = () => {
 
   const itemsPerPage = 12;
 
-  const filterProduit = data.filter((produit) =>
-    produit.categorie.includes(selectedRadio)
+  const filterProduit = data.filter((recette) =>
+    recette.types.includes(selectedRadio)
   );
   const paginatedData = Pagination.getData(
     filterProduit,
@@ -78,17 +78,17 @@ const Produits = () => {
 
       <ul className="produits-list">
         {paginatedData
-          .filter((produit) => {
+          .filter((recette) => {
             if (searchTerm === "") {
-              return produit;
+              return recette;
             } else if (
-              produit.nom.toLowerCase().includes(searchTerm.toLowerCase())
+              recette.titre.toLowerCase().includes(searchTerm.toLowerCase())
             ) {
-              return produit;
+              return recette;
             }
           })
-          .map((produit) => (
-            <Card produit={produit} key={produit.nom} />
+          .map((recette) => (
+            <CardRecette recette={recette} key={recette.titre} />
           ))}
       </ul>
 
@@ -104,4 +104,4 @@ const Produits = () => {
   );
 };
 
-export default Produits;
+export default Recettes;

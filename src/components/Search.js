@@ -21,8 +21,7 @@ const Search = () => {
             setFusion([
               ...obj1.data["hydra:member"],
               ...obj2.data["hydra:member"],
-            ]) 
-            
+            ])             
           })
         );
     }, []);
@@ -48,10 +47,11 @@ const Search = () => {
             }
           )
           .map((item) => (          
-            <tr key={item.id}>                
-            <td>{item.nom}{item.titre}</td>
+            <div key={item.id}>                
+            
             <Link to={`/produits/${item.id}`}>{item.nom}</Link>
-            </tr>
+            <Link to={`/recettes/${item.id}`}>{item.titre}</Link>
+            </div>
           ))}
       
     </>

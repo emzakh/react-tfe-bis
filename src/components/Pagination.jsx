@@ -15,18 +15,18 @@ const Pagination = (props) => {
         <>
             <ul className="pagination">
                 <li className={"page-item" + (props.currentPage === 1 ? " disabled" : null)}>
-                    <button className="page-link" onClick={()=>props.onPageChanged(props.currentPage - 1)} ><h4>&laquo;</h4></button>
+                    <button className="page-link" onClick={()=>props.onPageChanged(props.currentPage - 1)} >&laquo;</button>
                 </li>
                 {pages.map(page => (
                     <li key={page} className={"page-item" + (props.currentPage === page ? " active" : null) }>
-                        <button className="page-link" onClick={() => props.onPageChanged(page)}>  <h4>{page}</h4></button>
+                        <button className="page-link" onClick={() => props.onPageChanged(page)}>  {page}</button>
                     </li>
                 ))}
 
                 
 
                 <li className={"page-item" + (props.currentPage === pagesCount ? " disabled" : null)}>
-                    <button className="page-link" onClick={()=>props.onPageChanged(props.currentPage + 1)} ><h4>&raquo;</h4></button>
+                    <button className="page-link" onClick={()=>props.onPageChanged(props.currentPage + 1)} >&raquo;</button>
                 </li>
 
             </ul>

@@ -20,7 +20,7 @@ const Recettes = () => {
       .then((res) => res.data["hydra:member"])
       .then((data) => setData(data));
   }, []);
-
+console.log(data)
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };

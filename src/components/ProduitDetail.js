@@ -29,7 +29,7 @@ const ProduitDetail = ({match}) => {
             <h1>{item.categorie}</h1>           
             {
                item.recettesAssociees.map(recette => (
-                   <div>
+                   <div key={recette.id}>
                    {recette.titre}
                    {recette.id}
                    </div>

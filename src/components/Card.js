@@ -4,7 +4,6 @@ import {Link} from 'react-router-dom';
 const Card = (props) => {
     const { produit } = props; //  raccourci de : const produit = props.produit, permet de skip le premier {produit: {...}}
     
-    
 
     return (
         <li className="card">

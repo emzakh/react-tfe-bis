@@ -5,7 +5,7 @@ import Home from './pages/Home';
 import NotFound from './pages/NotFound';
 import Produits from './pages/Produits';
 import Recettes from './pages/Recettes';
-
+import RecetteDetail from './components/RecetteDetail';
 import ProduitDetail from './components/ProduitDetail';
 
 const App = () => {
@@ -17,6 +17,7 @@ const App = () => {
         <Route path="/produits" exact component={Produits}/>
         <Route path="/recettes" exact component={Recettes}/>
         <Route path="/produits/:id" component={ProduitDetail} />
+        <Route path="/recettes/:id" component={RecetteDetail} />
         <Route component={NotFound}/>  
         
       </Switch>

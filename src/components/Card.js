@@ -9,14 +9,14 @@ const Card = (props) => {
         <li className="card">
           
             <img src={'img/' + produit.image} alt="imageproduit" />
+            <Link to={`/produits/${produit.id}`}>  
             <div className="data-container">
-                <ul>
-                    <li><Link to={`/produits/${produit.id}`}>{produit.nom}</Link></li>                    
-                    <li>{produit.categorie}</li>
-                    
-                 
+                <ul >
+                 <li>{produit.categorie}</li>  
                 </ul>
             </div>
+               <div className="productNameCard">{produit.nom}</div>                    
+            </Link> 
           
            
         </li>

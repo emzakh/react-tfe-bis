@@ -74,7 +74,7 @@ const Produits = () => {
 
       {/* SEARCH BAR */}
 
-      <input type="text" placeholder="Search..." onChange={(event) => {setSearchTerm(event.target.value);}}/>
+      <input className="searchProduct" type="text" placeholder="Search..." onChange={(event) => {setSearchTerm(event.target.value);}}/>
 
       <ul className="produits-list">
         {paginatedData

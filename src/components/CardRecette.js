@@ -7,16 +7,23 @@ const CardRecette = (props) => {
     
 
     return (
-        <li className="card">
+        <li className="cardRecette">
             
-            <img src={'img/' + recette.imgRecette} alt="imagerecette" />
+
+            <img src={'img/' + recette.imgRecette} className="card-img-recette" alt="imageproduit" />
+            <Link to={`/produits/${recette.id}`}>  
             <div className="data-container">
-                <ul>
-                    <li><Link to={`/recettes/${recette.id}`}>{recette.titre}</Link></li>                    
-                    <li>{recette.types}</li>                    
-                 
+                <ul >
+                 <li>{recette.types}</li>  
                 </ul>
             </div>
+               <div className="productNameCard">{recette.titre}</div>                    
+            </Link> 
+
+
+
+
+         
           
            
         </li>

@@ -6,7 +6,7 @@ import Pagination from "./Pagination";
 const Recettes = () => {
   const [data, setData] = useState([]);
   const [selectedRadio, setSelectedRadio] = useState("");
-  const radios = ["Plat", "Boisson", "Dessert"];
+  const radios = ["Plat", "Boisson", "Dessert", "Toutes les recettes"];
 
   //pagination
   const [currentPage, setCurrentPage] = useState(1);
@@ -20,7 +20,6 @@ const Recettes = () => {
       .then((res) => res.data["hydra:member"])
       .then((data) => setData(data));
   }, []);
-console.log(data)
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
@@ -37,14 +36,12 @@ console.log(data)
   );
 
   const handleSelectFilter = (event) => {
-    const value = event.currentTarget.value;
-    setSelectedRadio(value);
-    // mettre à la page 1 pour que la fonction getData fonctionne correctement
-    setCurrentPage(1);
-  };
-
-  const resetSelectFilter = (event) => {
-    setSelectedRadio("");
+    const value = event.currentTarget.value;    
+    if(value === "Toutes les recettes"){
+      setSelectedRadio("")
+    }else{
+      setSelectedRadio(value);
+    } 
     setCurrentPage(1);
   };
 
@@ -68,14 +65,14 @@ console.log(data)
           })}
         </ul>
       </div>
-      <div className="cancel">
-        {selectedRadio && <h5 onClick={resetSelectFilter}>Annuler filtre</h5>}
-      </div>
+   
 
       {/* SEARCH BAR */}
 
-      <input type="text" placeholder="Search..." onChange={(event) => {setSearchTerm(event.target.value);}}/>
-
+      <div className="search-box">
+    <button className="btn-search"><i className="fas fa-search"></i></button>
+    <input type="text" className="input-search" placeholder="Rechercher..." onChange={(event) => {setSearchTerm(event.target.value);}}/>
+  </div>
       <ul className="produits-list">
         {paginatedData
           .filter((recette) => {

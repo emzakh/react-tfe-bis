@@ -1,4 +1,4 @@
-.card {
+.cardRecette {
     height: 230px;
     position: relative;
     margin: 2px;
@@ -15,7 +15,7 @@
     }
   
     img {
-      object-fit: contain;
+      object-fit: cover;
       height: 230px;
       width: 200px;
       

@@ -6,7 +6,7 @@ import Pagination from "./Pagination";
 const Produits = () => {
   const [data, setData] = useState([]);
   const [selectedRadio, setSelectedRadio] = useState("");
-  const radios = ["Jardin", "Epices", "Potager"];
+  const radios = ["Jardin", "Epices", "Potager", "Tous les produits"];
 
   //pagination
   const [currentPage, setCurrentPage] = useState(1);
@@ -37,17 +37,16 @@ const Produits = () => {
   );
 
   const handleSelectFilter = (event) => {
-    const value = event.currentTarget.value;
-    setSelectedRadio(value);
-    // mettre à la page 1 pour que la fonction getData fonctionne correctement
+    const value = event.currentTarget.value;    
+    if(value === "Tous les produits"){
+      setSelectedRadio("")
+    }else{
+      setSelectedRadio(value);
+    } 
     setCurrentPage(1);
   };
 
-  const resetSelectFilter = (event) => {
-    setSelectedRadio("");
-    setCurrentPage(1);
-  };
-
+ 
   return (
     <div className="produits">
       <div className="sort-container">
@@ -59,22 +58,28 @@ const Produits = () => {
                   type="radio"
                   value={radio}
                   id={radio}
+                  // checked={radio === selectedRadio || radio === "Tous les produits"}
                   checked={radio === selectedRadio}
+                  
                   onChange={handleSelectFilter}
                 />
+                {console.log(radio)}
                 <label htmlFor={radio}>{radio}</label>
               </li>
             );
           })}
         </ul>
       </div>
-      <div className="cancel">
-        {selectedRadio && <h5 onClick={resetSelectFilter}>Annuler filtre</h5>}
-      </div>
+  
 
       {/* SEARCH BAR */}
 
-      <input className="searchProduct" type="text" placeholder="Search..." onChange={(event) => {setSearchTerm(event.target.value);}}/>
+      <div className="search-box">
+    <button className="btn-search"><i className="fas fa-search"></i></button>
+    <input type="text" className="input-search" placeholder="Rechercher..." onChange={(event) => {setSearchTerm(event.target.value);}}/>
+  </div>
+
+      {/* <input className="searchProduct" type="text" placeholder="Search..." onChange={(event) => {setSearchTerm(event.target.value);}}/> */}
 
       <ul className="produits-list">
         {paginatedData

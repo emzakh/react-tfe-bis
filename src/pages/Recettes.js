@@ -8,8 +8,7 @@ import Recettes from '../components/Recettes';
 const Recette = () =>{
     return (
         <div className="recette">
-            <Navigation/>
-            <Logo/>           
+            <Navigation/>                 
             <Recettes/>
             
         </div>

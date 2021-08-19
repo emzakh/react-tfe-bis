@@ -1,12 +1,31 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom"
 import Logo from './Logo';
+import SearchBarBis from './SearchBarBis';
+import axios from "axios"
+
 
 const Navigation = () => {
-    return (
-        <div className="navigation">
-         
 
+    const [fusion, setFusion] = useState([]);
+    useEffect(() => {
+      axios
+        .all([
+          axios.get("http://localhost:8000/api/produits"),
+          axios.get("http://localhost:8000/api/recettes"),
+        ])
+        .then(
+          axios.spread((obj1, obj2) => {
+            setFusion([
+              ...obj1.data["hydra:member"],
+              ...obj2.data["hydra:member"],
+            ])             
+          })
+        );
+    }, []);
+
+    return (
+        <div className="navigation">    
 
             <NavLink exact to ="/" activeClassName="nav-active">
                 Home
@@ -23,6 +42,8 @@ const Navigation = () => {
             <NavLink exact to ="/recettes" activeClassName="nav-active">
                 Recettes
             </NavLink>
+
+            <SearchBarBis placeholder="Recherche..." data={fusion} />
         </div>
     );
 };

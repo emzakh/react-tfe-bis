@@ -5,6 +5,8 @@ import {Link} from 'react-router-dom';
 
 
 const Search = () => {
+ 
+
     const [searchTerm, setSearchTerm] = useState("");
     const [fusion, setFusion] = useState([]);
     //const fusion = [];
@@ -27,9 +29,12 @@ const Search = () => {
     }, []);
    // item.nom.includes(searchTerm.toLowerCase()) || item.titre.includes(searchTerm.toLowerCase())
 
+    
+
   return (
     <>
-      <input type="text" placeholder="Search..." onChange={(event) => {setSearchTerm(event.target.value);}}/>
+    <div className="search-container">
+      <input className="search-input" type="text" placeholder="Search..." onChange={(event) => {setSearchTerm(event.target.value);}}/>
       
         {
         fusion.filter((item) => {
@@ -47,13 +52,13 @@ const Search = () => {
             }
           )
           .map((item) => (          
-            <div key={item.id}>                
+            <div className="search-result" key={item.id}>                
             
             <Link to={`/produits/${item.id}`}>{item.nom}</Link>
             <Link to={`/recettes/${item.id}`}>{item.titre}</Link>
             </div>
           ))}
-      
+      </div>
     </>
   );
 };

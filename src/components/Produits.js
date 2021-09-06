@@ -39,11 +39,14 @@ const Produits = () => {
   const handleSelectFilter = (event) => {
     const value = event.currentTarget.value;    
     if(value === "Tous les produits"){
+      // setSelectedRadio("Tous les produits")
       setSelectedRadio("")
+     
     }else{
       setSelectedRadio(value);
     } 
     setCurrentPage(1);
+    // console.log(setSelectedRadio)
   };
 
  
@@ -58,9 +61,7 @@ const Produits = () => {
                   type="radio"
                   value={radio}
                   id={radio}
-                  // checked={radio === selectedRadio || radio === "Tous les produits"}
-                  checked={radio === selectedRadio}
-                  
+                  name="choice" // remplace mon truc checked debilos. Radio != checkbox
                   onChange={handleSelectFilter}
                 />
                 {console.log(radio)}

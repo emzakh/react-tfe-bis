@@ -9,6 +9,10 @@ const Commentaire = (props) => {
                 </div>
                 <div className="contenu" dangerouslySetInnerHTML={{__html:props.contenu}}></div>
 
+                <div className="rating">
+                   Note sur 5 :  {props.rating}
+                </div>
+
                
             </div>
 

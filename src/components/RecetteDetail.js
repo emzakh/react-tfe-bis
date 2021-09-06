@@ -4,6 +4,8 @@ import Navigation from '../components/Navigation';
 import Logo from "./Logo";
 import Ingredient from "../components/Ingredient";
 import Commentaire from "../components/Commentaire";
+import { Link } from "react-router-dom";
+
 
 const RecetteDetail = ({match}) => {
     // const [item, setItem] = useState({nom:'',nomlatin:'',effets:'',description:'',categorie:'', image:'', recettesAssociees:[] }); 
@@ -22,53 +24,61 @@ const RecetteDetail = ({match}) => {
 //object.key cree un tableau avec des clés
 //transforme un objet en tableau 
 
-    const ingredients = Object.keys(item.ingredients).map((ig)=>(        
-        // <div key={ig}>
-        //     {item.ingredients[ig].nom}
-        // </div>      
+    const ingredients = Object.keys(item.ingredients).map((ig)=>(            
         <Ingredient key={ig} nom={item.ingredients[ig].nom}/> 
     ))
 
     const commentaires = Object.keys(item.commentaires).map((com)=>( 
-        <Commentaire key={com} nom={item.commentaires[com].author.fullName} contenu={item.commentaires[com].contenu}/>
+        <Commentaire key={com} nom={item.commentaires[com].author.fullName} contenu={item.commentaires[com].contenu} rating={item.commentaires[com].rating}/>
     ))
 
+   
 
 
   return (
         <>
             <Navigation/>     
             <Logo/>      
-            <div key={item.titre}>   
-            <h1>TITRE:{item.titre}</h1>
-            <h1>DATE:{item.date}</h1>
-            <h1>DESCRIPTION:{item.description}</h1>
-            <h1>ETAPES:{item.etapes}</h1>                    
-            {/* <h1>COMMENTAIRES:{item.commentaires}</h1>            */}
-            {commentaires}
-            {/* {
-            item.commentaires.map(comment=>(
-                <div key={item.id}>
-                    {comment.contenu}
+            <div className="recette-container" key={item.titre}>   
+                <div className="recette-titre">
+                    <h1>{item.titre}</h1>
+                    <div className="recette-etapes_description">
+                {item.description}
                 </div>
-            ))
-            } */}
+                    <img src={'/img/' + item.imgRecette} alt="imagerecette" />
 
+                    <div className="recette-author">
+                        <span><strong>Auteur : </strong>{item.author.fullName}</span> <br />     
+                        <span><strong>Type : </strong>{item.types}</span>     
 
-            <h1>TYPE:{item.types}</h1>           
-            <h1>AUTEUR:{item.author.fullName}</h1>           
-            {/* {console.log(item.ingredients)} */}
-       
-            {/* <img src={'/img/' + item.imgRecette} alt="imagerecette" /> */}
-            <h1>Ingredients : {ingredients}
-            {/* {                
-               item.ingredients.map(produit => (
-                   <div key={item.id}>
-                    {produit.nom}                
-                   </div>                   
-               )) 
-            } */}
-            </h1> 
+                    </div>                    
+            </div>
+
+            <div className="recette-etapes">
+               
+                <div className="recette-etapes_left">
+                    <h2>Les étapes de la recette</h2>
+                    {item.etapes}
+                </div>
+
+                <div className="recette-etapes_right">
+                    <h2>Ingredients</h2> 
+                    <div className="recette-ingredients_list">
+                    <span>{ingredients}</span>
+                    </div>
+                </div>
+            </div>
+            
+            {/* test comment */}
+            {console.log(item.commentaires)}
+            {commentaires}
+    {/* fin test comment */}
+
+                      
+                   
+                                             
+                
+           
             </div>    
         </>
     )

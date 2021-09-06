@@ -1,6 +1,7 @@
 .produit-container {
-    display: flex;
-    margin: 1.5rem;
+    display: flex;    
+    max-width: 1296px;
+    margin: 0.4rem auto;
 
     @media screen and (max-width: $medium) {
         flex-wrap: wrap;
@@ -9,6 +10,7 @@
     .produit-left {
         width: 70%;
         margin: 1.5rem;
+        // background-color: gray;
 
         @media screen and (max-width: $medium) {
             width: 100%;
@@ -159,7 +161,7 @@
                 img {
                     object-fit: cover;
                     height: 230px;
-                    width: 200px;
+                    max-width: 100%;
 
                 }
 
@@ -181,7 +183,7 @@
 
                     ul {
                         color: $color-2;
-                        padding-top: 100px;
+                        padding-top:40px;
                         display: grid;
                         height: 100%;
                         width: 100%;

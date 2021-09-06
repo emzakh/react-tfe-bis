@@ -1,0 +1,108 @@
+
+.recette-container{
+    
+    background-color:$color-6;
+    width:100%;
+    margin:0;
+    padding:0;
+    
+
+
+    .recette-titre{
+        text-align: center;
+        word-break: break-all;
+        font-weight: 300;
+        letter-spacing: .0625rem;
+        font-size: 1.475rem;
+
+    
+        h1{
+            margin-bottom:.0825rem;
+        }       
+
+        .recette-etapes_description{
+            width:60%;
+            margin: 0 auto;
+            font-weight:250;
+            font-size: .875rem;
+            font-style:italic;         
+            text-transform: uppercase;
+            letter-spacing: .0825rem;
+            margin-bottom: 1rem;            
+        }
+
+        img{
+            object-fit: cover;
+            height: 230px;
+            max-width: 100%;       
+        }
+
+        .recette-author{
+            
+            font-weight:250;
+            font-size: .875rem;
+            font-style:italic;                     
+            letter-spacing: .0625rem;
+            margin-bottom:2rem;
+        }
+    }
+
+    .recette-etapes{
+        max-width: 1296px;
+        margin: 0.4rem auto;
+        background-color:$color-5;
+        display:flex;
+        border-radius: 1.5rem;
+        flex-wrap: wrap;
+        padding-bottom:1.875rem;
+        
+        // .recette-etapes_description{
+        //     text-align: center;
+        //     width:100%;
+        //     border-bottom: solid 2px $color-6 ; 
+        //     padding:1rem;
+            
+        // }
+
+
+        .recette-etapes_left{
+            margin-top: 1.875rem;
+            width:50%;
+            padding-left:1.5rem;
+            white-space: pre-line;
+
+            h2{
+                margin-bottom: 1.875rem;
+            }
+
+        }
+
+        .recette-etapes_right{
+            margin-top: 1.875rem;
+            width:50%;
+            
+
+            h2{
+                margin-bottom: 1.875rem;
+            }
+
+           .recette-ingredients_list{
+            border: .0625rem solid rgba(30,46,7,.1);
+            text-align: center;
+            margin-right:1.875rem;
+
+            li{
+                border-bottom: .0625rem solid rgba(30,46,7,.1);
+            }
+           
+            li:last-child{
+                border-bottom: 0;
+            }
+
+           
+            
+           }
+        }
+    }
+
+}

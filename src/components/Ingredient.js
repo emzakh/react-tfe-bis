@@ -3,9 +3,10 @@ import React from 'react';
 const Ingredient = (props) => {
     return ( 
         <>
-            <div>
-                {props.nom}
-            </div>
+          
+            <li>{props.nom}</li>  
+               
+          
 
         </>
      );

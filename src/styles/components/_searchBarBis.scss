@@ -1,6 +1,6 @@
 .search{
     position:absolute;
-    right:0;
+    right:15%;
 }
 
 .searchInputs {
@@ -48,8 +48,14 @@ input:focus {
   overflow: hidden;
   overflow-y: auto;
   position:absolute;
-  z-index:99;
+  z-index:99; 
+
 }
+
+
+
+
+
 
 
 

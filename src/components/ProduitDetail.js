@@ -40,7 +40,7 @@ const ProduitDetail = ({ match }) => {
 
   return (
     <>
-      <Navigation />
+     
       <Logo />
 
       <div className="produit-container">

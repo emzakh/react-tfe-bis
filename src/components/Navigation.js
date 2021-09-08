@@ -43,6 +43,13 @@ const Navigation = () => {
                 Recettes
             </NavLink>
 
+            <NavLink exact to ="/auth" activeClassName="nav-active">
+                Login
+            </NavLink>
+            <NavLink exact to ="/register" activeClassName="nav-active">
+                Register
+            </NavLink>
+
             <SearchBarBis placeholder="Recherche..." data={fusion} />
         </div>
     );

@@ -4,6 +4,7 @@ import {Link} from "react-router-dom"
 import Axios from "axios"
 import { toast } from 'react-toastify'
 import {USERS_API} from '../config'
+import UploadFiles from "../components/upload-files.component";
 
 const RegisterPage = ({history}) => {
     const [user, setUser] = useState({
@@ -118,7 +119,11 @@ const RegisterPage = ({history}) => {
                     onChange={handleChange}
                 />
             
+            <div className="container" style={{ width: "600px" }}>
+   
 
+      <UploadFiles />
+    </div>
 
                 <div className="form-group">
                     <button type="submit" className="btn btn-success">Confirmation</button>

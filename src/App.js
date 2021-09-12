@@ -12,6 +12,7 @@ import Auth from './pages/Auth';
 import Register from './components/Register';
 import RecetteDetail from './components/RecetteDetail';
 import ProduitDetail from './components/ProduitDetail';
+import Edit from './pages/Edit';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -37,6 +38,7 @@ const App = () => {
         <Route path="/recettes/:id" component={RecetteDetail} />
         <Route path="/auth" component={Auth} />
         <Route path="/register" component={Register} />
+        <Route path="/edit" component={Edit} />
         <Route component={NotFound}/>  
         
       </Switch>

@@ -46,6 +46,9 @@ const Navigation = () => {
             <NavLink exact to ="/auth" activeClassName="nav-active">
                 Login
             </NavLink>
+            <NavLink exact to ="/edit" activeClassName="nav-active">
+                Edit Profile
+            </NavLink>
             <NavLink exact to ="/register" activeClassName="nav-active">
                 Register
             </NavLink>

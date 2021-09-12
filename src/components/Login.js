@@ -9,6 +9,8 @@ import { useHistory } from 'react-router-dom';
 const LoginPage = (props) => {
 
     const {setIsAuthenticated} = useContext(AuthContext)
+    
+
     const history = useHistory();
 
     const [credentials, setCredentials] = useState({
@@ -36,7 +38,7 @@ const LoginPage = (props) => {
             setIsAuthenticated(true)
             toast.success("Vous êtes connecté")           
             history.push('/');
-            console.log('connecté')
+            
         }catch(error){
             setError("Aucun compte ne possède cette adresse e-mail ou les informations ne correspond pas")
             console.log(error)

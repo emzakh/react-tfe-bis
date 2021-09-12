@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import Field from "./forms/Field"
+import FieldImage from "./forms/Field"
 import {Link} from "react-router-dom"
 import Axios from "axios"
 import { toast } from 'react-toastify'
-import {USERS_API} from '../config'
-import UploadFiles from "../components/upload-files.component";
+import {USERS_IMG_API} from '../config'
+import http from "../http-common";
+
 
 const RegisterPage = ({history}) => {
     const [user, setUser] = useState({
@@ -31,9 +33,11 @@ const RegisterPage = ({history}) => {
         const {name, value} = event.currentTarget
         setUser({...user, [name]: value})
     }
+    
 
     const fileSelectedHandler = event => {
         console.log(event.target.files[0])
+       setUser({...user,picture:event.target.files[0]}) 
     }
 
   
@@ -49,14 +53,29 @@ const RegisterPage = ({history}) => {
             setErrors(apiErrors)
             // on arrete si ce n'est pas bon
             return 
-        }
+        }  
+
+        let formData = new FormData();
+
+        formData.append("firstName", user.firstName);
+        formData.append("lastName", user.lastName);
+        formData.append("email", user.email);
+        formData.append("password", user.password);
+        formData.append("passwordConfirm", user.passwordConfirm);
+        formData.append("picture", user.picture);
+
         try{
-            await Axios.post(USERS_API, user)
+            await Axios.post(USERS_IMG_API, formData, {
+                headers: {
+                  "Content-Type": "multipart/form-data",
+                }}
+                )
             setErrors({})
             toast.success("Vous êtes inscrit, vous pouvez vous connecter")
             history.replace("/auth")
         }catch({response})
         {
+            console.log(response)
             const {violations} = response.data
             if(violations){
 
@@ -74,7 +93,7 @@ const RegisterPage = ({history}) => {
     return ( 
         <>
             <h1>Inscriptions</h1>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} encType="multipart/form-data">
                 <Field 
                     name="firstName"
                     label="Prénom"
@@ -119,11 +138,12 @@ const RegisterPage = ({history}) => {
                     onChange={handleChange}
                 />
             
-            <div className="container" style={{ width: "600px" }}>
-   
-
-      <UploadFiles />
-    </div>
+            <div className="container" style={{ width: "600px" }}>   
+                <input
+                type="file"                               
+                onChange={fileSelectedHandler}
+                />
+            </div>
 
                 <div className="form-group">
                     <button type="submit" className="btn btn-success">Confirmation</button>

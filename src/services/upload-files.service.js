@@ -6,7 +6,7 @@ class UploadFilesService {
 
     formData.append("file", file);
 
-    return http.post("api/media_objects", formData, {
+    return http.post("users/upload", formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
@@ -14,9 +14,7 @@ class UploadFilesService {
     });
   }
 
-  getFiles() {
-    return http.get("api/files");
-  }
+
 }
 
 export default new UploadFilesService();

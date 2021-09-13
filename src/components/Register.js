@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import Field from "./forms/Field"
-import FieldImage from "./forms/Field"
 import {Link} from "react-router-dom"
 import Axios from "axios"
 import { toast } from 'react-toastify'
 import {USERS_IMG_API} from '../config'
-import http from "../http-common";
+// import http from "../http-common";
 
 
 const RegisterPage = ({history}) => {

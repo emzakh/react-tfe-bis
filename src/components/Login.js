@@ -4,6 +4,7 @@ import authAPI from '../services/authAPI'
 import Field from './forms/Field'
 import { toast } from 'react-toastify'
 import { useHistory } from 'react-router-dom';
+import {useLoginContext, useUpdateLoginContext} from '../contexts/LoginContext'
 
 
 const LoginPage = (props) => {
@@ -24,7 +25,7 @@ const LoginPage = (props) => {
         const value = event.currentTarget.value
         const name = event.currentTarget.name 
 
-        // ... copie de l'objet credentials et la vifgule permet de dire avec modification (ajout ou remplacement)
+        // ... copie de l'objet credentials et la virgule permet de dire avec modification (ajout ou remplacement)
         // si on laisse simplement le name, il va venir écrire une entré name donc on va utiliser les crochet pour prendre en considération la valeur de la const name (ex: username)
         setCredentials({...credentials, [name]:value})
     }
@@ -35,7 +36,8 @@ const LoginPage = (props) => {
         try{
             await authAPI.authenticate(credentials)
             setError("")
-            setIsAuthenticated(true)
+            setIsAuthenticated(true)            
+            
             toast.success("Vous êtes connecté")           
             history.push('/');
             

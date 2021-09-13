@@ -5,15 +5,14 @@ import {LOGIN_API} from '../config'
 
 function authenticate(credentials){
     return Axios
-            .post(LOGIN_API, credentials)
-            .then(response => response.data.token)
-            .then(token => {
+            .post(LOGIN_API, credentials)            
+            .then(response => {
                 // utilisation du localstorage pour stocker mon token
-                window.localStorage.setItem("authToken", token)
+                window.localStorage.setItem("authToken", response.data.token)
                 // on va prévenir Axios qu'on a un header par défaut avec un Bearer Token
-                Axios.defaults.headers["Authorization"]="Bearer " + token 
-
-                return true
+                Axios.defaults.headers["Authorization"]="Bearer " + response.data.token 
+                
+                return response.data
             })
 }
 
@@ -31,7 +30,7 @@ function setup(){
         // si le token existe et s'il est encore valide 
         const jwtData = jwtDecode(token)
         // jwtDecode décole le token et on a par exemple accès à la variable d'expiration
-
+        
         // millisecondes vs secondes 
         if((jwtData.exp * 1000) > new Date().getTime())
         {
@@ -52,6 +51,7 @@ function isAuthenticated(){
     }
     return false // pas de token 
 }
+
 
 
 export default {

@@ -44,13 +44,13 @@ const App = () => {
         {/* <UserContext.Provider value={value}> */}
         <Route path="/" exact component={Home} /> 
         <Route path="/a-propos" component={About}/>
+        <Route path="/auth" component={Auth} />
+        <Route path="/register" component={Register} />
+        <GetAllUsers>
         <Route path="/produits" exact component={Produits}/>
         <Route path="/recettes" exact component={Recettes}/>
         <Route path="/produits/:id" component={ProduitDetail} />
         <Route path="/recettes/:id" component={RecetteDetail} />
-        <Route path="/auth" component={Auth} />
-        <Route path="/register" component={Register} />
-        <GetAllUsers>
         <Route path="/edit" component={Edit} />
         </GetAllUsers>
         {/* </UserContext.Provider> */}

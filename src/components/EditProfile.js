@@ -22,15 +22,18 @@ export default function EditProfile(props) {
 
     useEffect(() => {
         const fetchItem = async () => {
-          const fetchItem = await axios.get(
-            `http://localhost:8000/api/users/${user.id}`
-          );
-          const dataItem = await fetchItem.data;
-          setItem(dataItem);
+          if(user!=null){
+            const fetchItem = await axios.get(
+              `http://localhost:8000/api/users/${user.id}`
+            );
+            const dataItem = await fetchItem.data;
+            setItem(dataItem);
+
+          }
         //   console.log(dataItem);
         };
         fetchItem();
-      }, [user.id]);
+      });
 
       console.log(item)
 

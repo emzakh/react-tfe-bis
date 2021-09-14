@@ -1,4 +1,4 @@
-import axios from "axios";
+import Axios from "axios";
 import React, { useState, useEffect } from "react";
 import Navigation from "../components/Navigation";
 import Logo from "./Logo";
@@ -6,6 +6,10 @@ import Ingredient from "../components/Ingredient";
 import Commentaire from "../components/Commentaire";
 import { Link } from "react-router-dom";
 import { Rating, RatingView } from "react-simple-star-rating";
+import {TestConsoleLogUsers} from '../contexts/TestUserContext'
+import { toast } from 'react-toastify'
+
+
 
 const RecetteDetail = ({ match }) => {
   // const [item, setItem] = useState({nom:'',nomlatin:'',effets:'',description:'',categorie:'', image:'', recettesAssociees:[] });
@@ -34,12 +38,12 @@ const RecetteDetail = ({ match }) => {
 
   useEffect(() => {
     const fetchItem = async () => {
-      const fetchItem = await axios.get(
+      const fetchItem = await Axios.get(
         `http://localhost:8000/api/recettes/${match.params.id}`
       );
       const dataItem = await fetchItem.data;
       setItem(dataItem);
-      console.log(dataItem);
+     // console.log(dataItem);
     };
     fetchItem();
   }, [match.params.id]);
@@ -64,6 +68,62 @@ const RecetteDetail = ({ match }) => {
       
     />
   ));
+  const user = TestConsoleLogUsers();
+
+
+    
+  // const [content, setContent] = useState(null)
+
+  const [comment, setComment] = useState({
+    contenu: "",
+    recette: "",
+    author: "",
+    rating:"",
+
+  })
+
+
+    //console.log(content)
+
+    const handleChange = (event) => {
+      const {name, value} = event.currentTarget
+      setComment({...comment, [name]: value})
+  }
+  
+    const handleSubmit = (event) =>{
+     
+
+      const newComment = {
+        contenu: comment.contenu,
+        recette: `api/recettes/${item.id}`,
+        author: `/api/users/${user.id}`,
+        rating: rating,
+      }
+      
+      console.log(newComment)
+     
+
+      
+        Axios.post('http://localhost:8000/api/commentaires', newComment, {
+            headers: {
+              "Content-Type": "application/json",
+              "Accept": "application/json"
+            }}
+            )
+            toast.success("c'est posté youpi")    
+    }
+
+    
+    // const handleSubmit = (event) =>{
+    //   axios.post("http://localhost:8000/api/commentaires", {
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     }})
+    //   .then(r => console.log(r))
+    // }
+
+
+
 
   return (
     <>
@@ -119,18 +179,32 @@ const RecetteDetail = ({ match }) => {
 
           <div className="commentaires-container_left">
             <p className="commentaires-title">
-              <h2>UserName, laissez votre avis !</h2>
+
+              { //check si y'a user
+              user.firstName
+              ? <h2>{user.firstName}, laissez votre avis !</h2>
+              : <h2>Enregistrez vous pour laissez votre avis !</h2>
+              } 
+              
+              
             </p>
             <label>Notez la recette</label>
             <Rating
               onClick={handleRating}
               ratingValue={rating} /* Rating Props */
             />
+
+
+
+                  
             <label>Votre commentaire</label>
+            <form onSubmit={handleSubmit}>
             <textarea
+              value={comment.contenu}
               id="comment"
-              name="comment"
+              name="contenu"
               placeholder="Laissez votre commentaire"
+              onChange={handleChange}
             ></textarea>
 
             <p className="form-submit">
@@ -138,6 +212,10 @@ const RecetteDetail = ({ match }) => {
                 Poster
               </button>
             </p>
+            </form>
+
+
+
           </div>
 
           <div className="commentaires-container_right">

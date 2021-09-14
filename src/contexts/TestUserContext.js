@@ -1,19 +1,41 @@
+
 import { createContext, useContext, useState, useEffect } from "react";
 import axios from 'axios';
+import { useLoginContext } from "../contexts/LoginContext";
 
- const TestUserContext = createContext(null)
+const TestUserContext = createContext(null)
 
  export function GetAllUsers(props){
+     
+   const user = useLoginContext();
 
-    const [users, setUsers] = useState();
+    const [item, setItem] = useState({
+        id: "",
+        firstName: "",
+        lastName: "",
+        email: "",
+        roles: [],
+        commentaires: {},        
+        recettes: {},
+        presentation: "",   
+      })
 
-    useEffect(()=>{
-        axios.get('http://localhost:8000/api/users')
-        .then(response => setUsers(response.data));
-    },[])
+    useEffect(() => {
+        const fetchItem = async () => {
+            if(user!=null){
+                const fetchItem = await axios.get(
+                  `http://localhost:8000/api/users/${user.id}`
+                );
+                const dataItem = await fetchItem.data;
+                setItem(dataItem);
+            }
+        //   console.log(dataItem);
+        };
+        fetchItem();
+      },[user]);
     
     return(
-        <TestUserContext.Provider value={users}>
+        <TestUserContext.Provider value={item}>
             {props.children}
         </TestUserContext.Provider>
 
@@ -24,3 +46,4 @@ import axios from 'axios';
  export function TestConsoleLogUsers() {
      return useContext(TestUserContext);
  }
+

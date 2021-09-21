@@ -17,7 +17,8 @@ const handleRating = (rating) => {
 }
 
 
-const deleteComment = (id) => {
+
+const deleteComment = (id, commentaires, setCommentaires) => {
     axios.delete(`http://localhost:8000/api/commentaires/${id}`, {
             headers: {
                 "Content-Type": "application/json",
@@ -25,7 +26,8 @@ const deleteComment = (id) => {
             }})
             .then(r =>{                
                 console.log(r)
-                props.splice(id, 1)
+                commentaires.splice(id, 1) 
+
             })
             toast.success("Commentaire supprimé")       
 }
@@ -44,12 +46,15 @@ const date = new Date(props.date)
                         <p>{props.nom} </p>
                         <span>{date.toLocaleString(undefined)}</span>
                         <RatingView ratingValue={props.rating} /* Rating Props */ />                        
-                        <div className="contenu" dangerouslySetInnerHTML={{__html:props.contenu}}></div>           
+                        <div className="contenu" dangerouslySetInnerHTML={{__html:props.contenu}}></div>          
+
                         <button onClick={()=>{
                             deleteComment(props.id)
                             // console.log(props.id)
 
                         }}>Delete</button>         
+
+                       
                     </div>    
                   
             </div>

@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, {useEffect, useState, useCallback} from "react";
+import React, {useEffect, useState} from "react";
 import Navigation from "../components/Navigation";
 import Logo from "./Logo";
 import Ingredient from "../components/Ingredient";
@@ -24,14 +24,18 @@ const RecetteDetail = ({match}) => {
                 setRecette(r.data)
                 setCommentaires(r.data.commentaires)
                 console.log(4, recette)
-                console.log(5, commentaires)
             })
+            
+        }, []);
+        
+        console.log(5, commentaires)
 
-    }, []);
+
 
     const handleRating = (rate) => {
         setRating(rate);        
     };
+    
 
     const handleChange = (event) => {
         const name = event.target.name;
@@ -59,8 +63,6 @@ const RecetteDetail = ({match}) => {
         }
 
       
-
-
         axios.post('http://localhost:8000/api/commentaires', newComment, {
             headers: {
                 "Content-Type": "application/json",
@@ -77,18 +79,21 @@ const RecetteDetail = ({match}) => {
 
 
     const commz = (commentaires).map((c, index) => (        
-        <Commentaire
+        <Commentaire 
         key={index}
-            // canEdit={c.author.id === user.id}            
+            canEdit={c.author.id === user.id}            
             nom={c.author.fullName}
             contenu={c.contenu}
             rating={c.rating}
             avatar={c.author.picture}
             date={c.createdAt}            
             id={c.id}
+            commentaires={commentaires}
+            setCommentaires={setCommentaires}
            
         />
     ));
+
 
     return (
         <>

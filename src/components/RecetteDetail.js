@@ -1,34 +1,49 @@
 import axios from "axios";
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState,useCallback} from "react";
 import Navigation from "../components/Navigation";
 import Logo from "./Logo";
 import Ingredient from "../components/Ingredient";
-import Commentaire from "../components/Commentaire";
-import {Rating} from "react-simple-star-rating";
+
+
 import {TestConsoleLogUsers} from '../contexts/TestUserContext'
 import {toast} from 'react-toastify'
+import { Rating, RatingView } from 'react-simple-star-rating'
+
+const VIEW='VIEW'
+const EDIT='EDIT'
 
 const RecetteDetail = ({match}) => {
+    
+    const [state, setState] = useState(VIEW)
+    const toggleEdit = useCallback(() =>{
+        setState(state => state === VIEW ? EDIT : VIEW)
+    },[])
+
+
     const user = TestConsoleLogUsers();
     const [body, setBody] = useState();
     const [recette, setRecette] = useState([]);
     const [commentaires, setCommentaires] = useState([]);
     const [rating, setRating] = useState(0);
+    // const [commentIndex, setCommentIndex] = useState(null);
+    const [deletedId, setDeletedId] = useState(null);
+    
+    
 
     useEffect(() => {
         axios.get(
             `http://localhost:8000/api/recettes/${match.params.id}`
         )
             .then(r => {
-                console.log(3, r.data)
+                // console.log(3, r.data)
                 setRecette(r.data)
                 setCommentaires(r.data.commentaires)
-                console.log(4, recette)
+                // console.log(4, recette)
             })
             
         }, []);
         
-        console.log(5, commentaires)
+        // console.log(5, commentaires)
 
 
 
@@ -36,6 +51,7 @@ const RecetteDetail = ({match}) => {
         setRating(rate);        
     };
     
+  
 
     const handleChange = (event) => {
         const name = event.target.name;
@@ -44,22 +60,14 @@ const RecetteDetail = ({match}) => {
             ...body, [name]: value
         })
     }
-
-    
-
-    console.log(6, body)
-    console.log(7, user)
     
     const handleSubmit = (event) => {
-
         event.preventDefault()
-
         const newComment = {
             contenu: body.contenu,
             recette: `api/recettes/${recette.id}`,
             author: `/api/users/${user.id}`,
             rating: rating
-
         }
 
       
@@ -68,31 +76,34 @@ const RecetteDetail = ({match}) => {
                 "Content-Type": "application/json",
                 "Accept": "application/json"
             }})
-            .then(r => console.log(r))
-            setCommentaires([
-                ...commentaires, {...newComment, createdAt:Date.now(),author:{fullName:user.fullName, picture:user.picture}}
-            ])
+            .then(r => {
+                setCommentaires([
+                    ...commentaires, {...newComment, id:r.data.id, createdAt:Date.now(),author:{fullName:user.fullName, picture:user.picture}}
+                ])
+            })
         toast.success("Commentaire posté ;)")
     }
 
 
+    
+const deleteComment = (id, index) => {
+    // console.log(20, id, index)
+    axios.delete(`http://localhost:8000/api/commentaires/`+ id, {
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            }})
+            .then(r =>{                
+                // console.log(r)
+                commentaires.splice(index, 1)
+                setCommentaires(commentaires)
+                setDeletedId(id)
+            })
+            toast.success("Commentaire supprimé")       
+}
 
 
-    const commz = (commentaires).map((c, index) => (        
-        <Commentaire 
-        key={index}
-            canEdit={c.author.id === user.id}            
-            nom={c.author.fullName}
-            contenu={c.contenu}
-            rating={c.rating}
-            avatar={c.author.picture}
-            date={c.createdAt}            
-            id={c.id}
-            commentaires={commentaires}
-            setCommentaires={setCommentaires}
-           
-        />
-    ));
+
 
 
     return (
@@ -174,12 +185,12 @@ const RecetteDetail = ({match}) => {
                 <label>Votre commentaire</label>
 
                 <form onSubmit={handleSubmit}>
-            <textarea
+                <textarea
                 id="comment"
                 name="contenu"
                 placeholder="Laissez votre commentaire"
                 onChange={handleChange}
-            />
+                />
                     <p className="form-submit">
                         <button type="submit" className="btnSubmit">
                             Poster
@@ -192,7 +203,41 @@ const RecetteDetail = ({match}) => {
                     <h2>Avis des utilisateurs</h2>
                 </p>
 
-                {commz}
+                   
+
+            {commentaires.map((c, index) => (                   
+            <div key={index}>               
+            <div className="commentaires">                
+                    <div className="comment-user-avatar-container">
+                        <img src={"http://localhost:8000/uploads/" + c.author.picture} alt="imgavatar" />
+                    </div>
+                    <div className="comment-user-info-container">
+                        <p>{c.author.fullName} </p>
+                        <span>{new Date(c.createdAt).toLocaleString(undefined)}</span>
+                        <RatingView ratingValue={c.rating} /* Rating Props */ />      
+
+                        {state === VIEW 
+                        ? <div className="contenu"> {c.contenu} </div>
+                        : null
+
+                         
+                        }                 
+
+                      
+                        { 
+                        user.id === c.author.id
+                            ? <button className="btn btn-danger" onClick={()=>{deleteComment(c.id, index)}}>Delete</button> 
+                            
+                            : null
+                        }                        
+                        <button className="btn btn-secondary" onClick={toggleEdit}>Edit</button>          
+
+                       
+                    </div>    
+                  
+            </div>
+            </div>   
+            ))}              
                 
 
                 {commentaires.length > 2 && (

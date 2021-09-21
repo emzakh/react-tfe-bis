@@ -9,16 +9,9 @@ import {TestConsoleLogUsers} from '../contexts/TestUserContext'
 import {toast} from 'react-toastify'
 import { Rating, RatingView } from 'react-simple-star-rating'
 
-const VIEW='VIEW'
-const EDIT='EDIT'
+
 
 const RecetteDetail = ({match}) => {
-    
-    const [state, setState] = useState(VIEW)
-    const toggleEdit = useCallback(() =>{
-        setState(state => state === VIEW ? EDIT : VIEW)
-    },[])
-
 
     const user = TestConsoleLogUsers();
     const [body, setBody] = useState();
@@ -27,8 +20,32 @@ const RecetteDetail = ({match}) => {
     const [rating, setRating] = useState(0);
     // const [commentIndex, setCommentIndex] = useState(null);
     const [deletedId, setDeletedId] = useState(null);
-    
-    
+    const [editedId, setEditedId] = useState(null);
+    const [editedComment, setEditedComment] = useState(null)
+    const [editedRating, setEditedRating] = useState(null)
+
+    const updateComment = (event) =>{        
+        setCommentaires(commentaires => commentaires.map(c=>{
+            if(c.id === editedId ){
+                c.contenu = editedComment
+                c.rating = editedRating
+            }
+            return c
+        }))
+        setEditedId(null)
+        event.preventDefault();  
+        axios.put('http://localhost:8000/api/commentaires/'+ editedId, {contenu:editedComment, rating:editedRating}, {
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            }})
+        .then((r)=>{
+            console.log(r)
+           
+            
+        })
+    } 
+                         
 
     useEffect(() => {
         axios.get(
@@ -205,7 +222,7 @@ const deleteComment = (id, index) => {
 
                    
 
-            {commentaires.map((c, index) => (                   
+            {commentaires.map((c, index) => (                                   
             <div key={index}>               
             <div className="commentaires">                
                     <div className="comment-user-avatar-container">
@@ -214,12 +231,40 @@ const deleteComment = (id, index) => {
                     <div className="comment-user-info-container">
                         <p>{c.author.fullName} </p>
                         <span>{new Date(c.createdAt).toLocaleString(undefined)}</span>
-                        <RatingView ratingValue={c.rating} /* Rating Props */ />      
+                         
 
-                        {state === VIEW 
-                        ? <div className="contenu"> {c.contenu} </div>
-                        : null
+                        {editedId !== c.id 
+                        ?
+                        <div>
+                        <RatingView ratingValue={c.rating} /* Rating Props */ />     
+                        <div className="contenu"> {c.contenu} </div>
 
+                        </div>
+                        : 
+                        <form onSubmit={updateComment}>
+                        <Rating
+                        onClick={setEditedRating}
+                        ratingValue={editedRating} /* Rating Props */
+                />
+                            <textarea
+                            id="comment"
+                            name="contenu"
+                            placeholder="Laissez votre commentaire"
+                            onChange={event => {
+                                console.log(22, event.target.value)
+                                setEditedComment(event.target.value)
+                            }}
+                            >
+                            {editedComment}
+                            </textarea>
+                            <p className="form-submit">
+                            <button type="submit" className="btnSubmit">
+                                Poster
+                            </button>
+                            </p>
+                        </form>
+                    // recupérer l'id (editedId) 
+                    // transferer le c.contenu
                          
                         }                 
 
@@ -229,9 +274,13 @@ const deleteComment = (id, index) => {
                             ? <button className="btn btn-danger" onClick={()=>{deleteComment(c.id, index)}}>Delete</button> 
                             
                             : null
-                        }                        
-                        <button className="btn btn-secondary" onClick={toggleEdit}>Edit</button>          
+                        }  
 
+                        { 
+                        user.id === c.author.id             
+                        ?<button className="btn btn-secondary" onClick={() => {setEditedId(c.id);setEditedComment(c.contenu);}}>Edit</button>     
+                        : null     
+                        }   
                        
                     </div>    
                   

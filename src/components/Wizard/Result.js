@@ -56,10 +56,10 @@ export const Result = () => {
     // }
    
 
-const authorplz = {
-  author:`/api/users/${user.id}`
-}
-    formData.append("author",authorplz)    
+// const authorplz = {
+//   author:`/api/users/${user.id}`
+// }
+    formData.append("author",`/api/users/${user.id}`)    
     // formData.append("date", "2021");
     if (data.files) {
       data.files.forEach((file) => {

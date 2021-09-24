@@ -68,6 +68,9 @@ const RegisterPage = ({history}) => {
                   "Content-Type": "multipart/form-data",
                 }}
                 )
+                for (var pair of formData.entries()) {
+                    console.log(pair[0]+ ', ' + pair[1]); 
+                }
             setErrors({})
             toast.success("Vous êtes inscrit, vous pouvez vous connecter")
             history.replace("/auth")

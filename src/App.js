@@ -11,7 +11,6 @@ import NotFound from './pages/NotFound';
 import Produits from './pages/Produits';
 import Recettes from './pages/Recettes';
 import authAPI from './services/authAPI';
-
 import Auth from './pages/Auth';
 import Register from './components/Register';
 import RecetteDetail from './components/RecetteDetail';
@@ -19,6 +18,14 @@ import ProduitDetail from './components/ProduitDetail';
 import Edit from './pages/Edit';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
+import {Step1} from "./components/Wizard/Step1";
+import {Step2} from "./components/Wizard/Step2";
+import {Step3} from "./components/Wizard/Step3";
+import {Result} from "./components/Wizard/Result";
+import {HeaderWizard} from "./components/Wizard/HeaderWizard";
+import Navigation from "./components/Navigation";
+import {DataProvider} from "./components/Wizard/DataContext";
 
 
 const App = () => {
@@ -52,10 +59,16 @@ const App = () => {
         <Route path="/produits/:id" component={ProduitDetail} />
         <Route path="/recettes/:id" component={RecetteDetail} />
         <Route path="/edit" component={Edit} />
+
+          <DataProvider>
+          <Route path="/step1" component={Step1}/>
+          <Route path="/step2"component={Step2}/>
+          <Route path="/step3"component={Step3}/>
+          <Route path="/result"component={Result}/>
+          </DataProvider>
         </GetAllUsers>
+        <Route component={NotFound}/>
         {/* </UserContext.Provider> */}
-        <Route component={NotFound}/>  
-        
       </Switch>
       <ToastContainer position={toast.POSITION.BOTTOM_LEFT} />
 

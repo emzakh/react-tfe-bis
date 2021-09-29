@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom"
-import Logo from './Logo';
 import SearchBarBis from './SearchBarBis';
 import axios from "axios"
 

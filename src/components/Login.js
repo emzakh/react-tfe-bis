@@ -4,7 +4,7 @@ import authAPI from '../services/authAPI'
 import Field from './forms/Field'
 import { toast } from 'react-toastify'
 import { useHistory } from 'react-router-dom';
-import {useLoginContext} from '../contexts/LoginContext'
+
 
 
 const LoginPage = (props) => {
@@ -47,6 +47,10 @@ const LoginPage = (props) => {
 
         }
     }
+
+
+
+
     
 
     return ( 

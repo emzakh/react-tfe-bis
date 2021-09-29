@@ -23,8 +23,6 @@ import {Step1} from "./components/Wizard/Step1";
 import {Step2} from "./components/Wizard/Step2";
 import {Step3} from "./components/Wizard/Step3";
 import {Result} from "./components/Wizard/Result";
-import {HeaderWizard} from "./components/Wizard/HeaderWizard";
-import Navigation from "./components/Navigation";
 import {DataProvider} from "./components/Wizard/DataContext";
 
 
@@ -59,7 +57,6 @@ const App = () => {
         <Route path="/produits/:id" component={ProduitDetail} />
         <Route path="/recettes/:id" component={RecetteDetail} />
         <Route path="/edit" component={Edit} />
-
           <DataProvider>
           <Route path="/step1" component={Step1}/>
           <Route path="/step2"component={Step2}/>

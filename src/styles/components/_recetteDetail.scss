@@ -1,6 +1,5 @@
 
-.recette-container{
-    
+.recette-container{    
     background-color:$color-6;
     width:100%;
     margin:0;
@@ -54,13 +53,6 @@
         padding-bottom:1.875rem;
         padding-left:2.875rem;
         padding-right:2.875rem;
-        // .recette-etapes_description{
-        //     text-align: center;
-        //     width:100%;
-        //     border-bottom: solid 2px $color-6 ; 
-        //     padding:1rem;
-            
-        // }
 
         .recette-info{
             width:100%;
@@ -238,10 +230,10 @@
     .btnAvis{   
         width:100%;     
         padding:16px;
+        margin-top:16px;
         display: flex;
         color:$color-6;
         background-color:$color-7;
-        align-items: center;
         text-decoration: none;
         justify-content: center;                    
         vertical-align: middle;

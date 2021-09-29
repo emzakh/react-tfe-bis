@@ -26,9 +26,11 @@ export const Step3 = () => {
         setValues(data);
     };
 
+    console.log(123, data)
+
     return (
         <>
-     <Navigation/>
+     {/* <Navigation/> */}
         <MainContainer>
             <Typography component="h2" variant="h5">
                 Step 3

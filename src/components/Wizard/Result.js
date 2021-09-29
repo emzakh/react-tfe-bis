@@ -1,6 +1,4 @@
-import React, { useState } from "react";
-import Confetti from "react-confetti";
-import Swal from "sweetalert2";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link, useHistory } from "react-router-dom";
 import { useData } from "./DataContext";
@@ -23,6 +21,9 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { TestConsoleLogUsers } from "../../contexts/TestUserContext";
 import Navigation from "../Navigation";
+import Axios from "axios"
+
+
 
 const useStyles = makeStyles({
   root: {
@@ -34,56 +35,75 @@ const useStyles = makeStyles({
 });
 
 export const Result = () => {
-  const user = TestConsoleLogUsers(); 
-  console.log(user)
-  console.log(user.id)
-  console.log(`/api/users/${user.id}`)
+  const user = TestConsoleLogUsers();
+  console.log(user);
+  console.log(user.id);
+  console.log(`/api/users/${user.id}`);
   const styles = useStyles();
   const { data } = useData();
   const history = useHistory();
   const entries = Object.entries(data).filter((entry) => entry[0] !== "files");
   const { files } = data;
 
-  const onSubmit = async () => {
-    let formData = new FormData();
-    
-    
-    // const auteur = {
-    //     "id" : user.id, 
-    //     "firstName" : user.firstName,
-    //     "lastName" : user.lastName,
-    //     "fullName" : user.fullName
-    // }
-   
+  const [produit, setProduit] = useState([
+    { nom: "Citron", id: 36 }
+  ]);
 
-// const authorplz = {
-//   author:`/api/users/${user.id}`
-// }
-    formData.append("author",`/api/users/${user.id}`)    
-    // formData.append("date", "2021");
-    if (data.files) {
-      data.files.forEach((file) => {
-        formData.append("imgRecette", file, file.name);
-      });
+  const fetchProduits = async () => {
+    try {
+      Axios.get("http://localhost:8000/api/produits")
+        .then((res) => res.data["hydra:member"])
+        .then((produit) => setProduit(produit))
+    } catch (error) {
+      console.log(error.response);
     }
+  };
 
-    entries.forEach((entry) => {
-      formData.append(entry[0], entry[1]);
-    });
+  useEffect(() => {
+    fetchProduits();  
+  }, []);
+
+  console.log('produit', produit)
+
+
+
+  console.log(420, entries)
+
+  const onSubmit = async () => {
+    let formData = new FormData();  
 
     try {
-      axios.post("http://localhost:8000/api/recettes/new", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          
+      if (data.files) {
+        data.files.forEach((file) => {
+          formData.append("imgRecette", file, file.name);
+        });
+      }
+      entries.forEach((entry) => {
+        console.log('entry', entry[0])
+        if(entry[0]==="ingredients"){
+
+          let simpleSel = entry[1].map(elem=>{
+            return elem.id
+          })
+          entry[1] = simpleSel.join(',')
 
         }
+        formData.append(entry[0], entry[1]);
       });
       for (var pair of formData.entries()) {
-        console.log(pair[0] + ", " + pair[1]);
+        console.log(421, pair[0] + ", " + pair[1]);
       }
-      toast.success("Votre recette a bien été envoyée !")
-      history.replace("/")
+      await axios
+        .post("http://localhost:8000/api/recettes/new", formData, {
+          headers: {           
+            "Content-Type": "multipart/form-data",
+            "Authorization": "Bearer " + window.localStorage.getItem("authToken"), 
+            
+          },
+        })
+        .then((response) => response.data);    
+      toast.success("Votre recette a bien été envoyée !");
+      history.replace("/");
     } catch ({ response }) {
       console.log(response);
       const { violations } = response.data;
@@ -94,7 +114,33 @@ export const Result = () => {
     }
   };
 
- 
+  const RenderCorrectEntries = props => {
+    console.log('props: ', props.entries);
+    props.entries.map((e) => {
+      if (e[0] === 'ingredients') {
+        console.log('IF');
+        return (
+          <TableRow key={e[0]}>
+            <TableCell component="th" scope="row">
+              {e[0]}
+            </TableCell>
+            {e[1].map((ingredient) => <TableCell align="justify" > {ingredient.nom }  </TableCell>)}
+          </TableRow>
+        )
+      } else {
+        console.log('ELSE');
+        return (
+          <TableRow key={e[0]}>
+            <TableCell component="th" scope="row">
+              {e[0]}
+            </TableCell>
+            <TableCell align="right">{e[1].toString()}</TableCell>
+          </TableRow>
+        )
+      }
+    })
+    console.log('NO IF');
+  }
 
   return (
     <>
@@ -113,14 +159,34 @@ export const Result = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {entries.map((entry) => (
-                <TableRow key={entry[0]}>
-                  <TableCell component="th" scope="row">
-                    {entry[0]}
-                  </TableCell>
-                  <TableCell align="right">{entry[1].toString()}</TableCell>
-                </TableRow>
-              ))}
+              {/* <RenderCorrectEntries entries={entries} /> */}
+
+              {entries.map((entry) => {
+                if (entry[0] === 'ingredients') {
+                  return (
+                    <TableRow key={entry[0]}>
+                      <TableCell component="th" scope="row">
+                        {entry[0]}
+                      </TableCell>
+                      {entry[1].map((ingredient) => <TableCell align="right">{ingredient.nom}</TableCell>)}
+                    </TableRow>
+                  )
+                }
+                console.log('entry:' , entry);
+
+
+                return (
+                  <TableRow key={entry[0]}>
+                    <TableCell component="th" scope="row">
+                      {entry[0]}
+                    </TableCell>
+                    <TableCell align="right">{entry[1].toString()}</TableCell>
+                  </TableRow>  
+                )
+              })}
+
+
+
             </TableBody>
           </Table>
         </TableContainer>

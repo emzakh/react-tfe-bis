@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme)=>({
 export const MainContainer = ({children, ...props}) => {
     const styles = useStyles();
     return (
-        <Container className={styles.root} component="main" maxWidth="xs" {...props}>
+        <Container className={styles.root} component="main" maxWidth="md" {...props}>
             {
                 children
             }

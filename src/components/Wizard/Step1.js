@@ -6,7 +6,7 @@ import { HeaderWizard } from "./HeaderWizard";
 import { MainContainer } from "./MainContainer";
 import { Form } from "./Form";
 import { Input } from "./Input";
-
+import {FormLabel} from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 
 import * as yup from "yup";
@@ -42,12 +42,14 @@ export const Step1 = () => {
   });
   const history = useHistory();
   const onSubmit = (data) => {
+    console.log(1, history)
+    console.log(2, data)
     history.push("/step2");
     setValues(data);
   };
   return (
     <>
-      <Navigation />
+      {/* <Navigation /> */}
       <MainContainer>
         <Typography component="h2" variant="h5">
           Step 1
@@ -70,13 +72,13 @@ export const Step1 = () => {
             error={!!errors.description}
             helperText={errors?.description?.message}
           />
+                    
           <InputSelect
             ref={register}
-            name="types"
-            
-            type="text"
-            error={!!errors.etapes}
+            name="types"                
+            error={!!errors.types}       
           />
+
           <PrimaryButton type="submit">Next</PrimaryButton>
         </Form>
       </MainContainer>

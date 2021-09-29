@@ -8,15 +8,12 @@ export const InputSelect = forwardRef((props, ref) => {
         <FormControl component="fieldset">
         <FormLabel component="legend">Types</FormLabel>
         <RadioGroup
-          aria-label="types"       
-         
-        //   inputRef={ref}
-        //   fullWidth
-        //   {...props}
+          name="types"          
+          aria-label="types"
         >
-          <FormControlLabel value="Plat" control={<Radio />} label="Plat" />
-          <FormControlLabel value="Dessert" control={<Radio />} label="Dessert" />
-          <FormControlLabel value="Boisson" control={<Radio />} label="Boisson" />
+          <FormControlLabel inputRef={ref} value="Plat" control={<Radio />} label="Plat" />
+          <FormControlLabel inputRef={ref} value="Dessert" control={<Radio />} label="Dessert" />
+          <FormControlLabel inputRef={ref} value="Boisson" control={<Radio />} label="Boisson" />
         </RadioGroup>
       </FormControl>
     );

@@ -3,17 +3,28 @@ import jwtDecode from 'jwt-decode'
 import {LOGIN_API} from '../config'
 
 
+// function authenticate(credentials){
+//     return Axios
+//             .post(LOGIN_API, credentials)            
+//             .then(response => {
+//                 // utilisation du localstorage pour stocker mon token
+//                 window.localStorage.setItem("authToken", response.data.token)
+//                 // on va prévenir Axios qu'on a un header par défaut avec un Bearer Token
+//                 Axios.defaults.headers["Authorization"]="Bearer " + response.data.token 
+                
+//                 return response.data
+//             })
+// }
+
 function authenticate(credentials){
     return Axios
-            .post(LOGIN_API, credentials)            
-            .then(response => {
-                // utilisation du localstorage pour stocker mon token
-                window.localStorage.setItem("authToken", response.data.token)
-                // on va prévenir Axios qu'on a un header par défaut avec un Bearer Token
-                Axios.defaults.headers["Authorization"]="Bearer " + response.data.token 
-                
-                return response.data
-            })
+        .post(LOGIN_API, credentials)
+        .then(response => response.data.token)
+        .then(token => {
+            window.localStorage.setItem("authToken", token)
+            Axios.defaults.headers["Authorization"] = "Bearer " + token
+        })
+
 }
 
 function logout(){
@@ -42,6 +53,7 @@ function setup(){
 
 function isAuthenticated(){
     const token = window.localStorage.getItem("authToken")
+    console.log(token)
     if(token){
         const jwtData = jwtDecode(token)
         if((jwtData.exp * 1000) > new Date().getTime()){

@@ -8,7 +8,8 @@ const CardRecette = (props) => {
 
     return (
         <li className="cardRecette">   
-            <img src={'img/' + recette.imgRecette} className="card-img-recette" alt="imageproduit" />
+        
+            <img src={'http://localhost:8000/uploads/' + recette.imgRecette} className="card-img-recette" alt="imageproduit" />
             <Link to={`/recettes/${recette.id}`}>  
             <div className="data-container">
                 <ul >

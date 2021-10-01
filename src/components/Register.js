@@ -1,13 +1,56 @@
 import React, { useState } from 'react';
-import Field from "./forms/Field"
 import {Link} from "react-router-dom"
 import Axios from "axios"
 import { toast } from 'react-toastify'
 import {USERS_IMG_API} from '../config'
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import TextField from "@material-ui/core/TextField";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
+import Grid from "@material-ui/core/Grid";
+import Box from "@material-ui/core/Box";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container";
+import { Input, Stack } from '@mui/material';
+
 // import http from "../http-common";
 
 
+const useStyles = makeStyles(theme => ({
+    "@global": {
+      body: {
+        backgroundColor: theme.palette.common.white
+      }
+    },
+    paper: {
+      marginTop: theme.spacing(8),
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center"
+    },
+    avatar: {
+      margin: theme.spacing(1),
+      backgroundColor: theme.palette.secondary.main
+    },
+    form: {
+      width: "100%", // Fix IE 11 issue.
+      marginTop: theme.spacing(3)
+    },
+    submit: {
+      margin: theme.spacing(3, 0, 2)
+    }
+  }));
+
+  
+
 const RegisterPage = ({history}) => {
+
+    const classes = useStyles();
+
     const [user, setUser] = useState({
         firstName: "",
         lastName: "",
@@ -32,10 +75,13 @@ const RegisterPage = ({history}) => {
         setUser({...user, [name]: value})
     }
     
+    const[fileName, setFileName] =  useState()
 
     const fileSelectedHandler = event => {
         console.log(event.target.files[0])
-       setUser({...user,picture:event.target.files[0]}) 
+        setUser({...user,picture:event.target.files[0]}) 
+        setFileName(event.target.files[0].name)
+
     }
 
   
@@ -91,68 +137,194 @@ const RegisterPage = ({history}) => {
 
     }
 
+    
+//                 {/* <Field 
+//                     name="firstName"
+//                     label="Prénom"
+//                     placeholder="Votre prénom"
+//                     error={errors.firstName}
+//                     value={user.firstName}
+//                     onChange={handleChange}
+//                 /> */}
+
+// {/* <Field 
+//                     name="lastName"
+//                     label="Nom de famille"
+//                     placeholder="Votre nom de famille"
+//                     error={errors.lastName}
+//                     value={user.lastName}
+//                     onChange={handleChange}
+//                 /> */}
+
+                
+// {/* <Field 
+//                     name="email"
+//                     label="Adresse E-mail"
+//                     type="email"
+//                     placeholder="Votre adresse e-mail"
+//                     error={errors.email}
+//                     value={user.email}
+//                     onChange={handleChange}
+//                 /> */}
+
+// {/* <Field 
+//                     name="password"
+//                     label="Mot de passe"
+//                     type="password"
+//                     placeholder="Votre mot de passe"
+//                     error={errors.password}
+//                     value={user.password}
+//                     onChange={handleChange}
+//                 /> */}
+
+// {/* <Field 
+//                     name="passwordConfirm"
+//                     label="Confirmation de mot de passe"
+//                     type="password"
+//                     placeholder="Confirmez votre mot de passe"
+//                     error={errors.passwordConfirm}
+//                     value={user.passwordConfirm}
+//                     onChange={handleChange}
+//                 /> */}
+
     return ( 
-        <>
-            <h1>Inscriptions</h1>
-            <form onSubmit={handleSubmit} encType="multipart/form-data">
-                <Field 
-                    name="firstName"
-                    label="Prénom"
-                    placeholder="Votre prénom"
-                    error={errors.firstName}
-                    value={user.firstName}
-                    onChange={handleChange}
-                />
-                <Field 
-                    name="lastName"
-                    label="Nom de famille"
-                    placeholder="Votre nom de famille"
-                    error={errors.lastName}
-                    value={user.lastName}
-                    onChange={handleChange}
-                />
-                 <Field 
-                    name="email"
-                    label="Adresse E-mail"
-                    type="email"
-                    placeholder="Votre adresse e-mail"
-                    error={errors.email}
-                    value={user.email}
-                    onChange={handleChange}
-                />
-                <Field 
-                    name="password"
-                    label="Mot de passe"
-                    type="password"
-                    placeholder="Votre mot de passe"
-                    error={errors.password}
-                    value={user.password}
-                    onChange={handleChange}
-                />
-                <Field 
-                    name="passwordConfirm"
-                    label="Confirmation de mot de passe"
-                    type="password"
-                    placeholder="Confirmez votre mot de passe"
-                    error={errors.passwordConfirm}
-                    value={user.passwordConfirm}
-                    onChange={handleChange}
-                />
-            
-            <div className="container" style={{ width: "600px" }}>   
+ 
+           
+
+                // <form className={classes.root} onSubmit={handleSubmit} encType="multipart/form-data">   
+<Container component="main" maxWidth="xs">
+<CssBaseline />
+<div className={classes.paper}>
+  <Avatar className={classes.avatar}>
+    <LockOutlinedIcon />
+  </Avatar>
+  <Typography component="h1" variant="h5">
+    Créer un compte
+  </Typography>
+  <form className={classes.form}onSubmit={handleSubmit} encType="multipart/form-data" noValidate>
+    <Grid container spacing={2}>
+      <Grid item xs={12} sm={6}>
+        <TextField
+          autoComplete="fname"
+          name="firstName"
+          variant="outlined"
+          required
+          fullWidth
+          id="firstName"
+          label="Prénom"
+          value={user.firstName}
+          onChange={handleChange}
+          autoFocus
+        />
+      </Grid>
+      <Grid item xs={12} sm={6}>
+        <TextField
+          variant="outlined"
+          required
+          fullWidth
+          id="lastName"
+          label="Nom de famille"
+          value={user.lastName}
+          onChange={handleChange}
+          name="lastName"
+          autoComplete="lname"
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <TextField
+          variant="outlined"
+          required
+          fullWidth
+          id="email"
+          label="Email Address"
+          name="email"
+          autoComplete="email"
+          value={user.email}
+          onChange={handleChange}
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <TextField
+          variant="outlined"
+          required
+          fullWidth
+          name="password"
+          label="Mot de passe"
+          type="password"
+          id="password"
+          autoComplete="current-password"
+          value={user.password}
+          onChange={handleChange}
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <TextField
+          variant="outlined"
+          required
+          fullWidth
+          name="passwordConfirm"
+          label="Confirmez le mot de passe"
+          type="password"
+          id="passwordConfirm"
+          autoComplete="current-password"
+          value={user.passwordConfirm}
+          onChange={handleChange}
+        />
+      </Grid>
+      <Grid item xs={12} sm={6}>
+        <Stack direction="row" alignItems="center" spacing={2}>
+        <label htmlFor="contained-button-file" className="fileAvatarUpload">
+            <Input accept="image/*" id="contained-button-file" multiple type="file" onChange={fileSelectedHandler}  />
+            <Button variant="contained" component="span">
+            Avatar
+            </Button>
+        </label>    
+        </Stack>
+       </Grid>
+
+    <Grid item xs={12} sm={6}>
+    <p>{fileName}</p>
+
+
+    </Grid>
+      <Grid item xs={12}>
+        <FormControlLabel
+          control={<Checkbox value="allowExtraEmails" color="primary" />}
+          label="Je veux recevoir des photos des chats via email"
+        />
+      </Grid>
+{/* 
+      <div className="container" style={{ width: "600px" }}>   
                 <input
                 type="file"                               
                 onChange={fileSelectedHandler}
                 />
-            </div>
+            </div> */}
 
-                <div className="form-group">
-                    <button type="submit" className="btn btn-success">Confirmation</button>
-                    <Link to="/login" className="btn btn-secondary">J'ai déjà un compte</Link>
-                </div>
-            </form>
-        </>
-     );
+
+
+
+    </Grid>
+    <Button
+      type="submit"
+      fullWidth
+      variant="contained"
+      color="primary"
+      className={classes.submit}
+    >
+      Sign Up
+    </Button>
+    <Grid container justify="flex-end">
+      <Grid item>
+      <Link to="/login">Vous avez déjà un compte ? Connectez-vous</Link>
+
+      </Grid>
+    </Grid>
+  </form>
+</div>
+<Box mt={5}>
+</Box>
+</Container>
+);
 }
- 
 export default RegisterPage;

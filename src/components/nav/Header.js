@@ -94,12 +94,7 @@ const Header = () => {
                 Home
               </Link>
             </li>
-
-            <li>
-              <Link to="/a-propos" onClick={menuToggleHandler}>
-                A propos
-              </Link>
-            </li>
+          
             <li>
               <Link to="/produits" onClick={menuToggleHandler}>
                 Produits
@@ -113,77 +108,87 @@ const Header = () => {
             <li>
               <SearchBarNav placeholder="Recherche..." data={fusion} />
             </li>
-            {!isAuthenticated ? (
-              <>
-                <li>
-                  <Link to="/register" onClick={menuToggleHandler}>
-                    Register
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/auth" onClick={menuToggleHandler}>
-                    Login
-                  </Link>
-                </li>
-              </>
-            ) : (
-              <>
-                <li>
-                  <Button
-                    id="basic-button"
-                    aria-controls="basic-menu"
-                    aria-haspopup="true"
-                    aria-expanded={open ? "true" : undefined}
-                    onClick={handleClick}
-                  >
-                    Dashboard
-                  </Button>
-                  <Menu
-                    id="basic-menu"
-                    anchorEl={anchorEl}
-                    open={open}
-                    onClose={handleClose}
-                    MenuListProps={{
-                      "aria-labelledby": "basic-button",
-                    }}
-                  >
-                    <MenuItem onClick={handleClose}>
-                      {" "}
-                      <Link to="/edit" onClick={menuToggleHandler}>
-                        Modifier mon profil
-                      </Link>
-                    </MenuItem>
 
-                    <MenuItem onClick={handleClose}>Mon compte</MenuItem>
+            
 
-                  
-                  
-
-                    {
-                      // check si role admin
-                      user.roles.includes("ROLE_ADMIN") ? (
-                        <MenuItem onClick={handleClose}>
-                        <a href="http://localhost:8000/admin" onClick={menuToggleHandler}>
-                        Administration
-                      </a>
-                      </MenuItem>
-                      ) : (
-                        <h2>pas admin</h2>
-                      )
-
-                      // if(user.roles.indexOf("ROLE_ADMIN")!= -1){
-                      //   <h2>admin!</h2>
-                      // }
-                    }
+            <li>
+              <ul>
+              {!isAuthenticated ? (
+                <>
+                  <li>
+                    <Link to="/register" onClick={menuToggleHandler}>
+                      Register
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/auth" onClick={menuToggleHandler}>
+                      Login
+                    </Link>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li>
+                    <Button
+                      id="basic-button"
+                      aria-controls="basic-menu"
+                      aria-haspopup="true"
+                      aria-expanded={open ? "true" : undefined}
+                      onClick={handleClick}
+                    >
+                      {user.firstName}
+                    </Button>
+                    <Menu
+                      id="basic-menu"
+                      anchorEl={anchorEl}
+                      open={open}
+                      onClose={handleClose}
+                      MenuListProps={{
+                        "aria-labelledby": "basic-button",
+                      }}
+                    >
                       <MenuItem onClick={handleClose}>
-                      <button onClick={handleLogout} className="btn btn-danger">
-                        Déconnexion
-                      </button>
-                    </MenuItem>
-                  </Menu>
-                </li>
-              </>
-            )}
+                        {" "}
+                        <Link to="/edit" onClick={menuToggleHandler}>
+                          Modifier mon profil
+                        </Link>
+                      </MenuItem>
+
+                      <MenuItem onClick={handleClose}>Mon compte</MenuItem>
+
+                      {
+                        // check si role admin
+                        user.roles.includes("ROLE_ADMIN") ? (
+                          <MenuItem onClick={handleClose}>
+                            <a
+                              href="http://localhost:8000/admin"
+                              onClick={menuToggleHandler}
+                            >
+                              Administration
+                            </a>
+                          </MenuItem>
+                        ) : (
+                          <h2>pas admin</h2>
+                        )
+
+                        // if(user.roles.indexOf("ROLE_ADMIN")!= -1){
+                        //   <h2>admin!</h2>
+                        // }
+                      }
+                      <MenuItem onClick={handleClose}>
+                        <button
+                          onClick={handleLogout}
+                          className="btn btn-danger"
+                        >
+                          Déconnexion
+                        </button>
+                      </MenuItem>
+                    </Menu>
+                  </li>
+                </>
+              )}
+              </ul>
+            </li>
           </ul>
         </nav>
         <div className={classes.header__content__toggle}>

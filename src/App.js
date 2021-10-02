@@ -7,7 +7,6 @@ import AuthContext from "./contexts/AuthContext";
 
 import { GetAllUsers } from "./contexts/TestUserContext";
 import { GetUser } from "./contexts/LoginContext";
-import About from "./pages/About";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import Produits from "./pages/Produits";
@@ -20,6 +19,7 @@ import LoginPage from "./components/Login";
 import Register from "./components/Register";
 import RecetteDetail from "./components/RecetteDetail";
 import ProduitDetail from "./components/ProduitDetail";
+import UserProfile from "./components/UserProfile";
 import Edit from "./pages/Edit";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -50,7 +50,7 @@ const App = () => {
           <Layout>
           <Switch>        
             <Route path="/" exact component={Home} />
-            <Route path="/a-propos" component={About} />
+            
             <Route path="/auth" component={LoginPage} />
             <Route path="/register" component={Register} />
               <Route path="/produits" exact component={Produits} />
@@ -58,6 +58,7 @@ const App = () => {
               <Route path="/produits/:id" component={ProduitDetail} />
               <Route path="/recettes/:id" component={RecetteDetail} />
               <Route path="/edit" component={Edit} />
+              <Route path="/profile" component={UserProfile} />
               <DataProvider>
                 <Route path="/step1" component={Step1} />
                 <Route path="/step2" component={Step2} />

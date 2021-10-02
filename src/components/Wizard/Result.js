@@ -20,7 +20,6 @@ import { MainContainer } from "./MainContainer";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { TestConsoleLogUsers } from "../../contexts/TestUserContext";
-import Navigation from "../Navigation";
 import Axios from "axios"
 
 
@@ -144,8 +143,6 @@ export const Result = () => {
 
   return (
     <>
-      <Navigation />
-
       <MainContainer>
         <Typography component="h2" variant="h5">
           📋 Votre recette

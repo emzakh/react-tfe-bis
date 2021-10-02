@@ -53,7 +53,7 @@ function SearchBar({ placeholder, data }) {
 
     <div className="search">
       <div className="searchInputs">   
-      <input type="text" className="input-search" placeholder={placeholder} value={wordEntered} onChange={handleFilter} ref={myRef} /> 
+      <input type="text" className="input-nav-search" placeholder={placeholder} value={wordEntered} onChange={handleFilter} ref={myRef} /> 
       </div>
  
 

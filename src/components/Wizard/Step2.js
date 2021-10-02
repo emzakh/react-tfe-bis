@@ -8,7 +8,6 @@ import { useData } from "./DataContext";
 import { Button } from "@material-ui/core";
 import { PrimaryButton } from "./PrimaryButton";
 import { yupResolver } from "@hookform/resolvers";
-import Navigation from "../Navigation";
 import { HeaderWizard } from "./HeaderWizard";
 import * as yup from "yup";
 import PropTypes from "prop-types";

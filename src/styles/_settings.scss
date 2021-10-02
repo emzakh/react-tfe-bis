@@ -9,7 +9,32 @@ $color-4: rgb(32, 35, 42);
 $color-5: white;
 $color-6: #f5f7f0;
 $color-7: #293f06;
+$Poppins: "Poppins", sans-serif;
 
+// colors
+$dark: rgb(29, 29, 29);
+$light: #fff;
+$primary: rgb(162, 162, 246);
+$bg: rgb(244, 244, 255);
+
+// spacing
+$spacing-md: 16px;
+$spacing-lg: 32px;
+
+// border radius
+$borderRadius: 12px;
+
+// header height
+$headerHeight: 100px;
+
+@mixin breakpoint($point) {
+    @if $point == md {
+        // 768px
+        @media (min-width: 48em) {
+            @content;
+        }
+    }
+}
 $small: 375px;
 $medium: 900px;
 

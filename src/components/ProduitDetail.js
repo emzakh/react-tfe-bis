@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import Navigation from "../components/Navigation";
 import Logo from "./Logo";
 import { Link } from "react-router-dom";
 import { div } from "prelude-ls";
@@ -40,8 +39,6 @@ const ProduitDetail = ({ match }) => {
 
   return (
     <>
-     <Navigation/>               
-
       <Logo />
 
       <div className="produit-container">

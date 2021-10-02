@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import Navigation from "../components/Navigation";
 import Logo from "./Logo";
 import Ingredient from "../components/Ingredient";
 
@@ -127,8 +126,7 @@ const RecetteDetail = ({ match }) => {
   };
 
   return (
-    <>
-      <Navigation />
+    <>    
       <Logo />
 
       <div className="recette-container">

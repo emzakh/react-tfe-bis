@@ -1,7 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router";
-import Navigation from "../Navigation";
 import { HeaderWizard } from "./HeaderWizard";
 import { MainContainer } from "./MainContainer";
 import { Form } from "./Form";

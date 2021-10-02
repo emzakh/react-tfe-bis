@@ -8,7 +8,12 @@
 @import "./components/search";
 @import "./components/produitDetail.scss";
 @import "./components/recetteDetail.scss";
-@import "./components/searchBar.scss";
-@import "./components/searchBarBis.scss";
 @import "./components/login.scss";
 @import "./components/register.scss";
+@import "./components/searchBarNav.scss";
+@import "./settings.scss";
+
+
+#root {
+    height: 100%;
+}

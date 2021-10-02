@@ -1,5 +1,4 @@
 import React from "react";
-import Navigation from '../components/Navigation';
 import Login from '../components/Login';
 
 const Auth = () => {
@@ -7,7 +6,6 @@ const Auth = () => {
     <div>
 
 <div className="login">
-            <Navigation/>               
             <Login/>            
         </div>
 

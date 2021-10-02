@@ -1,12 +1,12 @@
 import React from "react";
 import Login from '../components/Login';
 
-const Auth = () => {
+const Auth = (props) => {
   return (
     <div>
 
 <div className="login">
-            <Login/>            
+            <Login props={props}/>            
         </div>
 
     

@@ -2,13 +2,14 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Logo from "./Logo";
 import Ingredient from "../components/Ingredient";
-
 import { TestConsoleLogUsers } from "../contexts/TestUserContext";
+
 import { toast } from "react-toastify";
 import { Rating, RatingView } from "react-simple-star-rating";
 
 const RecetteDetail = ({ match }) => {
   const user = TestConsoleLogUsers();
+  console.log('userRecette: ',user)
   const [body, setBody] = useState();
   const [recette, setRecette] = useState([]);
   const [commentaires, setCommentaires] = useState([]);
@@ -126,8 +127,7 @@ const RecetteDetail = ({ match }) => {
   };
 
   return (
-    <>    
-      <Logo />
+    <>         
 
       <div className="recette-container">
         <div className="recette-titre">

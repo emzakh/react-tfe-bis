@@ -14,6 +14,9 @@ import Produits from "./pages/Produits";
 import Recettes from "./pages/Recettes";
 import authAPI from "./services/authAPI";
 import Auth from "./pages/Auth";
+
+import LoginPage from "./components/Login";
+
 import Register from "./components/Register";
 import RecetteDetail from "./components/RecetteDetail";
 import ProduitDetail from "./components/ProduitDetail";
@@ -37,17 +40,19 @@ const App = () => {
     setIsAuthenticated: setIsAuthenticated,
   };
 
+  console.log('isAuth App;: ', isAuthenticated);
+
   return (
         <BrowserRouter>
-          <Layout>
     <AuthContext.Provider value={contextValue}>
       <GetUser>
+            <GetAllUsers>
+          <Layout>
           <Switch>        
             <Route path="/" exact component={Home} />
             <Route path="/a-propos" component={About} />
-            <Route path="/auth" component={Auth} />
+            <Route path="/auth" component={LoginPage} />
             <Route path="/register" component={Register} />
-            <GetAllUsers>
               <Route path="/produits" exact component={Produits} />
               <Route path="/recettes" exact component={Recettes} />
               <Route path="/produits/:id" component={ProduitDetail} />
@@ -59,13 +64,13 @@ const App = () => {
                 <Route path="/step3" component={Step3} />
                 <Route path="/result" component={Result} />
               </DataProvider>
-            </GetAllUsers>
             <Route component={NotFound} />           
           </Switch>
           <ToastContainer position={toast.POSITION.BOTTOM_LEFT} />
+        </Layout>
+            </GetAllUsers>
       </GetUser>
     </AuthContext.Provider>
-        </Layout>
         </BrowserRouter>
   );
 };

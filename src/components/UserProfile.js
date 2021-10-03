@@ -1,10 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { TestConsoleLogUsers } from "../contexts/TestUserContext";
 import { Link } from "react-router-dom";
+import axios from 'axios';
 
-const UserProfilePage = ({ history }) => {
+const UserProfilePage = ({ history, match }) => {
   const user = TestConsoleLogUsers();
+  const [item, setItem] = useState({
+    email: "",
+    commentaires: [],
+    recettes: [],
+    firstName: "",
+    lastName: "",
+    picture: "",
+    presentation: "",
+    fullName: "",   
+  });
   console.log(user);
+
+  useEffect(() => {
+    const fetchItem = async () => {
+      const fetchItem = await axios.get(
+        `http://localhost:8000/api/users/${match.params.id}`
+      );
+      const dataItem = await fetchItem.data;
+      setItem(dataItem);
+      console.log(dataItem);
+    };
+    fetchItem();
+  }, [match.params.id]);
+
+  console.log(item)
 
   return (
     <>
@@ -13,13 +38,13 @@ const UserProfilePage = ({ history }) => {
           <div className="profile">
             <div className="profile-image">
               <img
-                src={"http://localhost:8000/uploads/" + user.picture}
+                src={"http://localhost:8000/uploads/" + item.picture}
                 alt="imgavatar"
               />
             </div>
 
             <div className="profile-user-settings">
-              <h1 className="profile-user-name">{user.fullName}</h1>
+              <h1 className="profile-user-name">{item.fullName}</h1>
 
               <button className="btn profile-edit-btn">Edit Profile</button>
             </div>
@@ -28,13 +53,13 @@ const UserProfilePage = ({ history }) => {
               <ul>
                 <li>
                   <span className="profile-stat-count">
-                    {user.recettes.length}
+                    {item.recettes.length}
                   </span>{" "}
                   recettes
                 </li>
                 <li>
                   <span className="profile-stat-count">
-                    {user.commentaires.length}
+                    {item.commentaires.length}
                   </span>{" "}
                   commentaires
                 </li>
@@ -43,7 +68,7 @@ const UserProfilePage = ({ history }) => {
 
             <div className="profile-bio">
               <p>
-                <span className="profile-real-name">{user.presentation}</span>{" "}
+                <span className="profile-real-name">{item.presentation}</span>{" "}
               </p>
             </div>
           </div>
@@ -81,11 +106,11 @@ const UserProfilePage = ({ history }) => {
               </div>
             ))} */}
 
-{user.recettes.length > 0 &&
+{item.recettes.length > 0 &&
        <div className="user-recette-container">
-       <h1>Les recettes de {user.firstName}</h1>
+       <h1>Les recettes de {item.firstName}</h1>
    <div className="produit-recettes">
-     {user.recettes.map((recette) => (
+     {item.recettes.map((recette) => (
        <div key={recette.id}>
            { console.log(recette.types)}
          <li className="card-produit-recette">
@@ -105,9 +130,9 @@ const UserProfilePage = ({ history }) => {
    </div>
    </div>
       }
-           {user.recettes.length < 1 &&
+           {item.recettes.length < 1 &&
      <div className="no-recette">  
-       <strong>{user.firstName}</strong> n'a pas encore de recette 
+       <strong>{item.firstName}</strong> n'a pas encore de recette 
        </div>
       }
           </div>

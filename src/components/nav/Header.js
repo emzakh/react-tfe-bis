@@ -154,7 +154,7 @@ const Header = () => {
                       </MenuItem>
 
                       <MenuItem onClick={handleClose}>
-                        <Link to="/profile" onClick={menuToggleHandler}>
+                        <Link to={`/profile/${user.id}`} onClick={menuToggleHandler}>
                         Mon compte
                         </Link>                        
                       </MenuItem>

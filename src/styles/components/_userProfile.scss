@@ -83,6 +83,8 @@ Flexbox and floats are used as a fallback so that browsers which don't support g
 
 .profile-user-settings {
     margin-top: 1.1rem;
+    display:flex;
+    flex-direction: column;
 }
 
 .profile-user-name {
@@ -92,12 +94,12 @@ Flexbox and floats are used as a fallback so that browsers which don't support g
 }
 
 .profile-edit-btn {
+    width:40%;
     font-size: 1.4rem;
     line-height: 1.8;
     border: 0.1rem solid #dbdbdb;
     border-radius: 0.3rem;
-    padding: 0 2.4rem;
-    
+    padding: 0 2.4rem;    
     margin-bottom:1.5rem;
 }
 

@@ -58,7 +58,7 @@ const App = () => {
               <Route path="/produits/:id" component={ProduitDetail} />
               <Route path="/recettes/:id" component={RecetteDetail} />
               <Route path="/edit" component={Edit} />
-              <Route path="/profile" component={UserProfile} />
+              <Route path="/profile/:id" component={UserProfile} />
               <DataProvider>
                 <Route path="/step1" component={Step1} />
                 <Route path="/step2" component={Step2} />

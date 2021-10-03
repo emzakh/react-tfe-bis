@@ -3,13 +3,13 @@ import React, { useEffect, useState } from "react";
 import Logo from "./Logo";
 import Ingredient from "../components/Ingredient";
 import { TestConsoleLogUsers } from "../contexts/TestUserContext";
-
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Rating, RatingView } from "react-simple-star-rating";
 
 const RecetteDetail = ({ match }) => {
   const user = TestConsoleLogUsers();
-  console.log('userRecette: ',user)
+  console.log("userRecette: ", user);
   const [body, setBody] = useState();
   const [recette, setRecette] = useState([]);
   const [commentaires, setCommentaires] = useState([]);
@@ -127,8 +127,7 @@ const RecetteDetail = ({ match }) => {
   };
 
   return (
-    <>         
-
+    <>
       <div className="recette-container">
         <div className="recette-titre">
           <h1>{recette.titre}</h1>
@@ -144,7 +143,11 @@ const RecetteDetail = ({ match }) => {
           <div className="recette-author">
             <span>
               <strong>Auteur : </strong>
-              {recette.author && recette.author.fullName}
+              {recette.author && (
+                <Link to={`/profile/${recette.author.id}`}>
+                  {recette.author.fullName}
+                </Link>
+              )}
             </span>
             <br />
             <span>
@@ -241,7 +244,13 @@ const RecetteDetail = ({ match }) => {
                     />
                   </div>
                   <div className="comment-user-info-container">
-                    <p>{c.author.fullName} </p>
+
+                  {c.author && (
+                <Link to={`/profile/${c.author.id}`}>
+                  {c.author.fullName}
+                </Link>
+              )}
+                    
                     <span>
                       {new Date(c.createdAt).toLocaleString(undefined)}
                     </span>
@@ -299,18 +308,14 @@ const RecetteDetail = ({ match }) => {
                     ) : null}
                   </div>
                 </div>
-                
               </div>
-              
             ))}
-        {commentaires.length > 2 && (
-            <button type="submit" className="btnAvis">
-              Voir tous les avis
-            </button>
-          )}
-
+            {commentaires.length > 2 && (
+              <button type="submit" className="btnAvis">
+                Voir tous les avis
+              </button>
+            )}
           </div>
-        
         </div>
       </div>
     </>

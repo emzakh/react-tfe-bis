@@ -15,7 +15,7 @@ import { TestConsoleLogUsers } from "../../contexts/TestUserContext";
 
 const Header = () => {
   const user = TestConsoleLogUsers();
-  console.log("nav", user);
+  
   const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -78,7 +78,7 @@ const Header = () => {
       );
   }, []);
 
-  console.log(1, isAuthenticated);
+  
 
   return (
     <header className={classes.header}>
@@ -147,14 +147,17 @@ const Header = () => {
                         "aria-labelledby": "basic-button",
                       }}
                     >
-                      <MenuItem onClick={handleClose}>
-                        {" "}
+                      <MenuItem onClick={handleClose}>                       
                         <Link to="/edit" onClick={menuToggleHandler}>
                           Modifier mon profil
                         </Link>
                       </MenuItem>
 
-                      <MenuItem onClick={handleClose}>Mon compte</MenuItem>
+                      <MenuItem onClick={handleClose}>
+                        <Link to="/profile" onClick={menuToggleHandler}>
+                        Mon compte
+                        </Link>                        
+                      </MenuItem>
 
                       {
                         // check si role admin

@@ -38,8 +38,7 @@ const ProduitDetail = ({ match }) => {
 
 
   return (
-    <>
-      <Logo />
+    <>     
 
       <div className="produit-container">
         <div className="produit-left">
@@ -134,7 +133,7 @@ const ProduitDetail = ({ match }) => {
      {item.recettesAssociees.map((recette) => (
        <div key={recette.id}>
          <li className="card-produit-recette">
-           <img src={"/img/" + recette.imgRecette} className="card-img-recette" alt="imagerecette"/>
+           <img src={"http://localhost:8000/uploads/" + recette.imgRecette} className="card-img-recette" alt="imagerecette"/>
            <Link to={`/recettes/${recette.id}`}>
              <div className="data-container">
                <ul>

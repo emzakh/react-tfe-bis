@@ -6,7 +6,7 @@ import { AiOutlineClose } from "react-icons/ai";
 import authAPI from "../../services/authAPI";
 import AuthContext from "../../contexts/AuthContext";
 import classes from "./Header.module.scss";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
@@ -15,7 +15,7 @@ import { TestConsoleLogUsers } from "../../contexts/TestUserContext";
 
 const Header = () => {
   const user = TestConsoleLogUsers();
-  
+  const history = useHistory()
   const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -30,7 +30,7 @@ const Header = () => {
     authAPI.logout();
     setIsAuthenticated(false);
     toast.info("Vous êtes deconnecté");
-    // props.history.push("/auth");
+    history.push("/");
   };
 
   const [menuOpen, setMenuOpen] = useState(false);
@@ -147,6 +147,8 @@ const Header = () => {
                         "aria-labelledby": "basic-button",
                       }}
                     >
+                     
+
                       <MenuItem onClick={handleClose}>                       
                         <Link to="/edit" onClick={menuToggleHandler}>
                           Modifier mon profil
@@ -154,10 +156,17 @@ const Header = () => {
                       </MenuItem>
 
                       <MenuItem onClick={handleClose}>
+                        <Link to={`/step1`} onClick={menuToggleHandler}>
+                        Ajouter une recette
+                        </Link>                        
+                      </MenuItem>
+
+                      <MenuItem onClick={handleClose}>
                         <Link to={`/profile/${user.id}`} onClick={menuToggleHandler}>
                         Mon compte
                         </Link>                        
                       </MenuItem>
+                     
 
                       {
                         // check si role admin

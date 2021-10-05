@@ -17,7 +17,9 @@ import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import { TestConsoleLogUsers } from "../contexts/TestUserContext";
 
+
 const LoginPage = (props) => {
+
  const user = TestConsoleLogUsers();
  console.log('userLogin:', user)
 
@@ -49,7 +51,7 @@ const LoginPage = (props) => {
       setIsAuthenticated(true);
 
       toast.success("Vous êtes connecté");
-      props.history.replace("/");
+      props.history.replace(`/`);
     } catch (error) {
         toast.error("Aucun compte ne possède cette adresse e-mail ou les informations ne correspond pas")
     }

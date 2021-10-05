@@ -1,11 +1,60 @@
 import React, { useState, useEffect } from "react";
 import { TestConsoleLogUsers } from "../contexts/TestUserContext";
 import { Link } from "react-router-dom";
-import axios from 'axios';
+import axios from "axios";
+import dateFormat from "dateformat";
+import LinesEllipsis from "react-lines-ellipsis";
 
 const UserProfilePage = ({ history, match }) => {
+  dateFormat.i18n = {
+    dayNames: [
+      "Dim",
+      "Lun",
+      "Mar",
+      "Merc",
+      "Jeu",
+      "Ven",
+      "Sam",
+      "Dimanche",
+      "Lundi",
+      "Mardi",
+      "Mercredi",
+      "Jeudi",
+      "Vendredi",
+      "Samedi",
+    ],
+    monthNames: [
+      "Jan",
+      "Fev",
+      "Mar",
+      "Avr",
+      "Mai",
+      "Juin",
+      "Juil",
+      "Au",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+      "Janvier",
+      "Fevrier",
+      "Mars",
+      "Avril",
+      "Mai",
+      "Juin",
+      "Juillet",
+      "Aout",
+      "Septembre",
+      "Octobre",
+      "Novembre",
+      "Decembre",
+    ],
+    timeNames: ["a", "p", "am", "pm", "A", "P", "AM", "PM"],
+  };
+
   const user = TestConsoleLogUsers();
   const [item, setItem] = useState({
+    id:"",
     email: "",
     commentaires: [],
     recettes: [],
@@ -13,7 +62,7 @@ const UserProfilePage = ({ history, match }) => {
     lastName: "",
     picture: "",
     presentation: "",
-    fullName: "",   
+    fullName: "",
   });
   console.log(user);
 
@@ -29,7 +78,7 @@ const UserProfilePage = ({ history, match }) => {
     fetchItem();
   }, [match.params.id]);
 
-  console.log(item)
+  console.log(12, item);
 
   return (
     <>
@@ -46,7 +95,22 @@ const UserProfilePage = ({ history, match }) => {
             <div className="profile-user-settings">
               <h1 className="profile-user-name">{item.fullName}</h1>
 
-              <button className="btn profile-edit-btn">Edit Profile</button>
+            
+              {
+                //check si y'a user
+                user.id === item.id ? (
+                  <Link to="/edit" className="btn profile-edit-btn">
+
+                Edit Profile
+                </Link>
+                ) : (
+                  <div>
+                    
+                  </div>
+                )
+              }
+               
+               
             </div>
 
             <div className="profile-stats">
@@ -78,63 +142,110 @@ const UserProfilePage = ({ history, match }) => {
       <main>
         <div className="container-profile">
           <div className="gallery">
-          {/* {user.recettes.length> 0 &&         
+            {item.recettes.length < 1 && (
+              <div className="no-recette">
+                <strong>{item.firstName}</strong> n'a pas encore de recette
+              </div>
+            )}
 
-          
-          user.recettes.map((recette) => (
-              <div key={recette.id}>
-                <div className="gallery-item">
-                  <img
-                    src="https://images.unsplash.com/photo-1511765224389-37f0e77cf0eb?w=500&h=500&fit=crop"
-                    className="gallery-image"
-                    alt=""
-                  />
-
-                  <div className="gallery-item-info">
-                    <ul>
-                      <li className="gallery-item-likes">
-                        <span className="visually-hidden">Likes:</span>
-                        <i className="fas fa-heart" aria-hidden="true"></i> 56
+            {item.recettes.length > 0 && (
+              <div className="user-recette-container">
+                <h1>Les recettes de {item.firstName}</h1>
+                <div className="profile-recettes">
+                  {item.recettes.map((recette) => (
+                    <div key={recette.id}>
+                      {console.log(recette.types)}
+                      <li className="card-produit-recette">
+                        <img
+                          src={
+                            "http://localhost:8000/uploads/" +
+                            recette.imgRecette
+                          }
+                          className="card-img-recette"
+                          alt="imagerecette"
+                        />
+                        <Link to={`/recettes/${recette.id}`}>
+                          <div className="data-container">
+                            <ul>
+                              <li>{recette.types}</li>
+                            </ul>
+                          </div>
+                          <div className="productNameCard">{recette.titre}</div>
+                        </Link>
                       </li>
-                      <li className="gallery-item-comments">
-                        <span className="visually-hidden">Comments:</span>
-                        <i className="fas fa-comment" aria-hidden="true"></i> 2
-                      </li>
-                    </ul>
-                  </div>
+                    </div>
+                  ))}
                 </div>
               </div>
-            ))} */}
+            )}
+            {item.recettes.length < 1 && (
+              <div className="no-recette">
+                <strong>{item.firstName}</strong> n'a pas encore de recette
+              </div>
+            )}
 
-{item.recettes.length > 0 &&
-       <div className="user-recette-container">
-       <h1>Les recettes de {item.firstName}</h1>
-   <div className="produit-recettes">
-     {item.recettes.map((recette) => (
-       <div key={recette.id}>
-           { console.log(recette.types)}
-         <li className="card-produit-recette">
-         <img src={"http://localhost:8000/uploads/" + recette.imgRecette} className="card-img-recette" alt="imagerecette"/>
-           <Link to={`/recettes/${recette.id}`}>
-             <div className="data-container">
-               <ul>
-                 <li>{recette.types}</li>
-               </ul>
-             </div>
-             <div className="productNameCard">{recette.titre}</div>
-           </Link>
-         </li>
-       </div>
-      
-     ))}
-   </div>
-   </div>
-      }
-           {item.recettes.length < 1 &&
-     <div className="no-recette">  
-       <strong>{item.firstName}</strong> n'a pas encore de recette 
-       </div>
-      }
+            {item.commentaires.length > 0 && (
+              <div className="user-recette-container">
+                <h1>Les commentaires de {item.firstName}</h1>
+                <div className="profile-commentaires">
+                  {item.commentaires.map((commentaire) => (
+                    <div key={commentaire.id}>
+                      <div className="commentaire_contenu">
+                        <div>
+                       
+
+                        <div className="commentaire_contenu_titre">
+                        Le  <span>{dateFormat(commentaire.createdAt, "dd/mm/yyyy ")}</span>
+                         
+                        @
+                            <span> 
+                            <Link to={`/recettes/${commentaire.recette.id}`}>
+                            {commentaire.recette.titre}
+                            </Link>                          
+                            </span>
+                      
+                          :
+                        </div>
+
+                        <div className="commentaire_contenu_content">
+                        <LinesEllipsis
+                            text={commentaire.contenu}
+                            maxLine="2"
+                            ellipsis="..."
+                            trimRight
+                            basedOn="letters"
+                          />
+
+                        </div>
+                      
+                    
+                      
+                         
+                        </div>
+                      </div>
+
+                      {/* <img
+                          src={
+                            "http://localhost:8000/uploads/" +
+                            recette.imgRecette
+                          }
+                          className="card-img-recette"
+                          alt="imagerecette"
+                        /> */}
+                      {/* <Link to={`/recettes/${recette.id}`}>
+                          <div className="data-container">
+                            <ul>
+                              <li>{recette.types}</li>
+                            </ul>
+                          </div>
+                          <div className="productNameCard">{recette.titre}</div>
+                        </Link> */}
+                      {/* </li> */}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </main>

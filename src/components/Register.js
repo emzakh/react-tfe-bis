@@ -57,6 +57,7 @@ const RegisterPage = ({history}) => {
         email: "",
         password: "",
         passwordConfirm: "",
+        presentation:"",
         picture: ""
     })
 
@@ -66,6 +67,7 @@ const RegisterPage = ({history}) => {
         email: "",
         password: "",
         passwordConfirm: "",
+        presentation:"",
         picture: ""
     })
 
@@ -107,6 +109,7 @@ const RegisterPage = ({history}) => {
         formData.append("password", user.password);
         formData.append("passwordConfirm", user.passwordConfirm);
         formData.append("picture", user.picture);
+        formData.append("presentation",user.presentation);
 
         try{
             await Axios.post(USERS_IMG_API, formData, {
@@ -137,59 +140,7 @@ const RegisterPage = ({history}) => {
 
     }
 
-    
-//                 {/* <Field 
-//                     name="firstName"
-//                     label="Prénom"
-//                     placeholder="Votre prénom"
-//                     error={errors.firstName}
-//                     value={user.firstName}
-//                     onChange={handleChange}
-//                 /> */}
-
-// {/* <Field 
-//                     name="lastName"
-//                     label="Nom de famille"
-//                     placeholder="Votre nom de famille"
-//                     error={errors.lastName}
-//                     value={user.lastName}
-//                     onChange={handleChange}
-//                 /> */}
-
-                
-// {/* <Field 
-//                     name="email"
-//                     label="Adresse E-mail"
-//                     type="email"
-//                     placeholder="Votre adresse e-mail"
-//                     error={errors.email}
-//                     value={user.email}
-//                     onChange={handleChange}
-//                 /> */}
-
-// {/* <Field 
-//                     name="password"
-//                     label="Mot de passe"
-//                     type="password"
-//                     placeholder="Votre mot de passe"
-//                     error={errors.password}
-//                     value={user.password}
-//                     onChange={handleChange}
-//                 /> */}
-
-// {/* <Field 
-//                     name="passwordConfirm"
-//                     label="Confirmation de mot de passe"
-//                     type="password"
-//                     placeholder="Confirmez votre mot de passe"
-//                     error={errors.passwordConfirm}
-//                     value={user.passwordConfirm}
-//                     onChange={handleChange}
-//                 /> */}
-
     return ( 
- 
-           
 
                 // <form className={classes.root} onSubmit={handleSubmit} encType="multipart/form-data">   
 <Container component="main" maxWidth="xs">
@@ -248,6 +199,19 @@ const RegisterPage = ({history}) => {
           variant="outlined"
           required
           fullWidth
+          id="presentation"
+          label="Présentez-vous!"
+          name="presentation"
+          autoComplete="presentation"
+          value={user.presentation}
+          onChange={handleChange}
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <TextField
+          variant="outlined"
+          required
+          fullWidth
           name="password"
           label="Mot de passe"
           type="password"
@@ -293,15 +257,6 @@ const RegisterPage = ({history}) => {
           label="Je veux recevoir des photos des chats via email"
         />
       </Grid>
-{/* 
-      <div className="container" style={{ width: "600px" }}>   
-                <input
-                type="file"                               
-                onChange={fileSelectedHandler}
-                />
-            </div> */}
-
-
 
 
     </Grid>

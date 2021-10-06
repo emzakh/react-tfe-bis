@@ -150,7 +150,7 @@ const Header = () => {
                      
 
                       <MenuItem onClick={handleClose}>                       
-                        <Link to="/edit" onClick={menuToggleHandler}>
+                        <Link to={`/edit/${user.id}`} onClick={menuToggleHandler}>
                           Modifier mon profil
                         </Link>
                       </MenuItem>

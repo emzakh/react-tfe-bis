@@ -122,8 +122,7 @@ export default function Editpw(props) {
           //??? -------------------------------------
           noValidate
         >
-          <Grid container spacing={2}>
-            <p>Uniquement pour modifier votre mot de passe</p>
+          <Grid container spacing={2}>           
 
             <Grid item xs={12}>
               <TextField
@@ -166,9 +165,9 @@ export default function Editpw(props) {
           
           <Grid container>
               <Grid item xs>
-              <Link to={`/profile/${user.id}`}>                
+              <Link to={`/edit/${user.id}`}>
                  Modifier vos informations ?
-                </Link>
+              </Link>
               </Grid>
               <Grid item>
               <Link to={`/editavatar/${user.id}`}> 

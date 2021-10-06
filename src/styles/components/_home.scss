@@ -1,5 +1,5 @@
-.hero--home{
-    font-family:$font-1;
+.hero--home {
+    font-family: $font-1;
     position: relative;
     z-index: 2;
     display: flex;
@@ -7,15 +7,16 @@
     align-content: center;
     -webkit-box-align: end;
     -ms-flex-align: end;
-    align-items: flex-end;   
+    align-items: flex-end;
     padding-bottom: 4.25rem;
     color: #fff;
-    text-align: center;      
+    text-align: center;
     width: 100%;
     background: url('../../img/bgHeroPage3.png');
     background-repeat: no-repeat;
     background-size: cover;
-  
+    min-height: 15rem;
+
 
     @media screen and (min-width: 48em) {
         -webkit-box-align: center;
@@ -25,12 +26,12 @@
     }
 
 
-    .hero__center{
-    position: relative;
-    z-index: 5;
-    width: 100%;
+    .hero__center {
+        position: relative;
+        z-index: 5;
+        width: 100%;
 
-        .hero__title h2{
+        .hero__title h2 {
             max-width: 51.875rem;
             padding: 0 1.25rem;
             margin: 3.75rem auto;
@@ -42,58 +43,155 @@
 
 }
 
-.page-body{
-    padding: 1.875rem 0;
-    overflow-x: hidden;
-}
 
-.page-body--white{
-    padding-top: 3.125rem;
-    
 
-  
-}
-  .HomeContainer{
+.HomeContainer {
+    width: 90%;
+    margin: 0 auto;  
+    overflow-x:hidden;
+    overflow-y:hidden;
     
-    width:90%;
-    margin: 0 auto;
     // @media screen and (max-width: 750px) {
-        
     //    width:100%;
-        
-        
     // }
- 
 
-    .HomeCarousel{
-        width:100%;
-        margin-left:280px;
+    .HomeCarousel {
+        width: 100%;
+        margin: 0 auto;
+       
+       
         @media screen and (max-width: 1600px) {
-            margin-left:0;
+            margin-left: 0;
 
         }
+
         @media screen and (max-width: 750px) {
             margin: 0 auto;
-            
+
         }
-       
 
-        img{            
-            width:330px;
-            height:327px;
-            object-fit:cover;
-            border-radius:5px;
-            cursor:pointer;
-
-            
+        a{
+            width:320px;
+            display: block;        
+            text-align: center;   
             @media screen and (max-width: 750px) {
                 margin: 0 auto;
-               width:100%;
-                
-                
-            }
-        
+                width: 90%;
+            }        
             
         }
+        // .slick-prev {
+        //     left: -5% !important;
+        //     z-index: 1;
+        //     color:red;
+        //     background-color:red;
+        //   }
+        //   .slick-next {
+        //     right: -5% !important;
+        //     z-index: 1;
+        //     color:red;
+        //     background-color:red;
+        //   }
+      
+
+        h2{
+            margin-top:16px;
+        }
+
+        img {
+            width: 320px;
+            height: 237px;
+            object-fit: cover;
+            border-radius: 5px;
+            cursor: pointer;
+
+
+            @media screen and (max-width: 750px) {
+                margin: 0 auto;
+                width: 90%;
+            }
+        }
+        li{
+           width:320px;
+            text-align: center;   
+            @media screen and (max-width: 750px) {
+                margin: 0 auto;
+                width: 90%;
+            }
+        }
     }
+
+}
+hr {
+    width: 67%;
+    margin: 0 auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.ProduitGrid {
+    width: 67%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    @media screen and (max-width: 750px) {
+        width: 90%;
+    }
+
+    .ProduitGrid-title {
+        text-align: center;
+        color: #556f2b;
+        margin-bottom: 30px;
+        width: 100%;
+    }
+
+
+
+    .actualGrid {       
+        box-sizing: border-box;
+        background-color: #976f2b;
+        display: grid;     
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        gap: 1.5em 1.5em;        
+        background-color: #fff;
+        @media screen and (max-width: 1500px) {
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: 1fr 1fr 1fr 1fr;
+        }
+
+        @media screen and (max-width: 750px) {
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+        }
+        
+        .flippy-container {
+            cursor:pointer;
+            img {
+                display:block;
+                width: 7.5em;
+                height: 10em;
+                object-fit: contain;
+                margin-left:auto;
+                margin-right:auto;
+               
+            }
+            .backside{
+               text-align: center;
+
+            }
+        }
+
+    
+
+      
+    }
+}
+.buttonProduit{
+    margin-top:30px;
+   display:flex;
+   justify-content: center;
+   margin-bottom:30px;
+   color:#556f2b;
 }

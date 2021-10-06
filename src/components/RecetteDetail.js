@@ -149,10 +149,13 @@ const RecetteDetail = ({ match }) => {
                 </Link>
               )}
             </span>
-            <br />
+          
             <span>
               <strong>Type : </strong>
               {recette.types}
+            </span>
+            <span>
+            <RatingView ratingValue={recette.avgRatings} />
             </span>
           </div>
         </div>

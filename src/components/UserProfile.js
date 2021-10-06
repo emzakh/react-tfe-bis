@@ -99,7 +99,9 @@ const UserProfilePage = ({ history, match }) => {
               {
                 //check si y'a user
                 user.id === item.id ? (
-                  <Link to="/edit" className="btn profile-edit-btn">
+
+                  <Link to={`/edit/${user.id}`} className="btn profile-edit-btn">               
+                 
 
                 Edit Profile
                 </Link>

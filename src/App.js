@@ -15,6 +15,8 @@ import authAPI from "./services/authAPI";
 import Auth from "./pages/Auth";
 
 import LoginPage from "./components/Login";
+import EditPw from "./components/EditPw";
+import EditAvatar from "./components/EditAvatar";
 
 import Register from "./components/Register";
 import RecetteDetail from "./components/RecetteDetail";
@@ -57,8 +59,11 @@ const App = () => {
               <Route path="/recettes" exact component={Recettes} />
               <Route path="/produits/:id" component={ProduitDetail} />
               <Route path="/recettes/:id" component={RecetteDetail} />
-              <Route path="/edit" component={Edit} />
+              <Route path="/edit/:id" component={Edit} />
               <Route path="/profile/:id" component={UserProfile} />
+              <Route path="/editpw/:id" component={EditPw} />
+              <Route path="/editavatar/:id" component={EditAvatar} />
+
               <DataProvider>
                 <Route path="/step1" component={Step1} />
                 <Route path="/step2" component={Step2} />

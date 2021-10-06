@@ -34,12 +34,13 @@
         }
 
         .recette-author{
-            
+            display:flex;
             font-weight:250;
             font-size: .875rem;
             font-style:italic;                     
             letter-spacing: .0625rem;
             margin-bottom:2rem;
+            flex-direction: column;
         }
     }
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 // import { TestConsoleLogUsers } from "../contexts/TestUserContext";
 import { useLoginContext } from "../contexts/LoginContext";
 import { Link } from "react-router-dom";
@@ -6,17 +6,15 @@ import Axios from "axios";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import { Input, Stack } from "@mui/material";
 import { toast } from "react-toastify";
+
+import { Input, Stack } from "@mui/material";
 import { USERS_IMG_API } from "../config";
 
 const useStyles = makeStyles((theme) => ({
@@ -44,29 +42,22 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function EditProfile(props) {
+export default function EditAvatar(props) {
   const classes = useStyles();
 
   // const users = TestConsoleLogUsers();
   const user = useLoginContext();
   console.log('user', user)
+
   const [profile, setProfile] = useState({
-    firstName: user.firstName,
-    lastName: user.lastName,
-    email: user.email,
-    picture: user.picture,
-    presentation: user.presentation,  
+    picture: user.picture, 
   });
 
-  const [errors, setErrors] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    picture: "",
-    presentation: "",  
+
+  const [errors, setErrors] = useState({  
+    picture: "",   
   });
 
-  console.log(profile);
 
   const handleChange = (event) => {
     const { name, value } = event.currentTarget;
@@ -95,18 +86,14 @@ export default function EditProfile(props) {
 
     let formData = new FormData();
 
-    formData.append("firstName", profile.firstName);
-    formData.append("lastName", profile.lastName);
-    formData.append("email", profile.email);
-    // formData.append("password", profile.password);
-    // formData.append("passwordConfirm", profile.passwordConfirm);
     formData.append("picture", profile.picture);
-    formData.append("presentation", profile.presentation);
+
 
     try {
       await Axios.put(`http://localhost:8000/api/users/${user.id}`, profile, {
         headers: {
-          "Content-Type": "application/json",
+            "Content-Type": "multipart/form-data",
+            "Authorization": "Bearer " + window.localStorage.getItem("authToken"),
         },
       });
       for (var pair of formData.entries()) {
@@ -142,7 +129,7 @@ export default function EditProfile(props) {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Modifier vos informations
+          Modifier votre avatar
         </Typography>
         <form
           className={classes.form}
@@ -151,60 +138,12 @@ export default function EditProfile(props) {
           noValidate
         >
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                autoComplete="fname"
-                name="firstName"
-                variant="outlined"
-                fullWidth
-                id="firstName"
-                label="Prénom"
-                value={profile.firstName}
-                onChange={handleChange}
-                autoFocus
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                variant="outlined"
-                fullWidth
-                id="lastName"
-                label="Nom de famille"
-                value={profile.lastName}
-                onChange={handleChange}
-                name="lastName"
-                autoComplete="lname"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-                value={profile.email}
-                onChange={handleChange}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                fullWidth
-                id="presentation"
-                label="Présentez-vous!"
-                name="presentation"
-                autoComplete="presentation"
-                value={profile.presentation}
-                onChange={handleChange}
-              />
-            </Grid>
+          
 
            
    
 
-            {/* <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={6}>
               <Stack direction="row" alignItems="center" spacing={2}>
                 <label
                   htmlFor="contained-button-file"
@@ -226,7 +165,7 @@ export default function EditProfile(props) {
 
             <Grid item xs={12} sm={6}>
               <p>{fileName}</p>
-            </Grid> */}
+            </Grid>
 
           </Grid>
           <Button
@@ -241,13 +180,15 @@ export default function EditProfile(props) {
 
           <Grid container>
               <Grid item xs>
+
+              <Link to={`/edit/${user.id}`}>                
+                 Modifier vos informations ?
+                </Link>
+              
+              </Grid>
+              <Grid item>             
               <Link to={`/editpw/${user.id}`}>                
                  Modifier votre mot de passe ?
-                </Link>
-              </Grid>
-              <Grid item>
-              <Link to={`/editavatar/${user.id}`}> 
-                 Modifier votre avatar ?
                 </Link>
               </Grid>
             </Grid>

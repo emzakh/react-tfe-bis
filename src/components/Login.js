@@ -41,15 +41,12 @@ const LoginPage = (props) => {
     setCredentials({ ...credentials, [name]: value });
   };
 
-
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
     console.log('isauth', isAuthenticated)
       await authAPI.authenticate(credentials);
       setIsAuthenticated(true);
-
       toast.success("Vous êtes connecté");
       props.history.replace(`/`);
     } catch (error) {

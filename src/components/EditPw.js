@@ -6,17 +6,15 @@ import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import { Link } from "react-router-dom";
-
+import { Link, useHistory } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import { Input, Stack } from "@mui/material";
 import { toast } from "react-toastify";
-import { USERS_IMG_API } from "../config";
+
 
 const useStyles = makeStyles((theme) => ({
   "@global": {
@@ -45,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Editpw(props) {
   const classes = useStyles();
-
+  const history = useHistory()
   // const users = TestConsoleLogUsers();
   const user = useLoginContext();
   console.log("user", user);
@@ -85,8 +83,10 @@ export default function Editpw(props) {
       // setErrors({})
 
       // await Axios.post(`http://localhost:8000/api/users/${user.id}`)
-
-      toast.success("Profil modifier");
+      
+      
+      toast.success("Profil modifié");
+      history.push(`/edit/${user.id}`);
     } catch ({ response }) {
       console.log(response);
       const { violations } = response.data;
@@ -95,7 +95,7 @@ export default function Editpw(props) {
         //   apiErrors[propertyPath] = message;
         // });
         // setErrors(apiErrors);
-        console.log("lol");
+        console.log(violations);
       }
       toast.error("Des erreurs dans votre formulaire...");
     }

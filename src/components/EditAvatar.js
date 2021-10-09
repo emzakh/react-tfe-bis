@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-// import { TestConsoleLogUsers } from "../contexts/TestUserContext";
 import { useLoginContext } from "../contexts/LoginContext";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Axios from "axios";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -13,9 +12,8 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { toast } from "react-toastify";
-
 import { Input, Stack } from "@mui/material";
-import { USERS_IMG_API } from "../config";
+
 
 const useStyles = makeStyles((theme) => ({
   "@global": {
@@ -44,6 +42,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function EditAvatar(props) {
   const classes = useStyles();
+  const history = useHistory()
 
   // const users = TestConsoleLogUsers();
   const user = useLoginContext();
@@ -53,16 +52,6 @@ export default function EditAvatar(props) {
     picture: user.picture, 
   });
 
-
-  const [errors, setErrors] = useState({  
-    picture: "",   
-  });
-
-
-  const handleChange = (event) => {
-    const { name, value } = event.currentTarget;
-    setProfile({ ...profile, [name]: value });
-  };
   const [fileName, setFileName] = useState();
 
   const fileSelectedHandler = (event) => {
@@ -75,35 +64,28 @@ export default function EditAvatar(props) {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // const apiErrors = {};
-    // if (profile.password !== profile.passwordConfirm) {
-    //   apiErrors.passwordConfirm =
-    //     "Votre confirmation de mot de passe n'est pas conforme à l'original";
-    //   setErrors(apiErrors);
-    //   // on arrete si ce n'est pas bon
-    //   return;
-    // }
-
     let formData = new FormData();
-
+    
+    formData.append("id", user.id);
     formData.append("picture", profile.picture);
 
 
     try {
-      await Axios.put(`http://localhost:8000/api/users/${user.id}`, profile, {
+      await Axios.post(`http://localhost:8000/api/users/updateavatar/${user.id}`, formData, {
         headers: {
-            "Content-Type": "multipart/form-data",
             "Authorization": "Bearer " + window.localStorage.getItem("authToken"),
+            "Content-Type": "multipart/form-data",
         },
       });
       for (var pair of formData.entries()) {
         console.log("formData", pair[0] + ", " + pair[1]);
-      }
-      // setErrors({})
-
-      // await Axios.post(`http://localhost:8000/api/users/${user.id}`)
+      }  
       
-      toast.success("Profil modifier");
+      toast.success("Profil modifié");
+      console.log('test reussi')
+     
+
+      history.push(`/edit/${user.id}`);
     } catch ({ response }) {
       console.log(response);
       const { violations } = response.data;

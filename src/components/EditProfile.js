@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 // import { TestConsoleLogUsers } from "../contexts/TestUserContext";
 import { useLoginContext } from "../contexts/LoginContext";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Axios from "axios";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -46,16 +46,16 @@ const useStyles = makeStyles((theme) => ({
 
 export default function EditProfile(props) {
   const classes = useStyles();
-
+  const history = useHistory()
   // const users = TestConsoleLogUsers();
   const user = useLoginContext();
-  console.log('user', user)
+  console.log("user", user);
   const [profile, setProfile] = useState({
     firstName: user.firstName,
     lastName: user.lastName,
     email: user.email,
     picture: user.picture,
-    presentation: user.presentation,  
+    presentation: user.presentation,
   });
 
   const [errors, setErrors] = useState({
@@ -63,7 +63,7 @@ export default function EditProfile(props) {
     lastName: "",
     email: "",
     picture: "",
-    presentation: "",  
+    presentation: "",
   });
 
   console.log(profile);
@@ -104,28 +104,25 @@ export default function EditProfile(props) {
     formData.append("presentation", profile.presentation);
 
     try {
-      await Axios.put(`http://localhost:8000/api/users/${user.id}`, profile, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      await Axios.put(
+        `http://127.0.0.1:8000/api/users/update/${user.id}`,
+        profile,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       for (var pair of formData.entries()) {
         console.log("formData", pair[0] + ", " + pair[1]);
       }
-      // setErrors({})
-
-      // await Axios.post(`http://localhost:8000/api/users/${user.id}`)
-      
-      toast.success("Profil modifier");
+      toast.success("Profil modifié");
+      history.push("/");
     } catch ({ response }) {
       console.log(response);
       const { violations } = response.data;
       if (violations) {
-        // violations.forEach(({ propertyPath, message }) => {
-        //   apiErrors[propertyPath] = message;
-        // });
-        // setErrors(apiErrors);
-        console.log(violations)
+        console.log(violations);
       }
       toast.error("Des erreurs dans votre formulaire...");
     }
@@ -144,12 +141,7 @@ export default function EditProfile(props) {
         <Typography component="h1" variant="h5">
           Modifier vos informations
         </Typography>
-        <form
-          className={classes.form}
-          onSubmit={handleSubmit}
-          encType="multipart/form-data"
-          noValidate
-        >
+        <form className={classes.form} onSubmit={handleSubmit}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
@@ -201,9 +193,6 @@ export default function EditProfile(props) {
               />
             </Grid>
 
-           
-   
-
             {/* <Grid item xs={12} sm={6}>
               <Stack direction="row" alignItems="center" spacing={2}>
                 <label
@@ -227,7 +216,6 @@ export default function EditProfile(props) {
             <Grid item xs={12} sm={6}>
               <p>{fileName}</p>
             </Grid> */}
-
           </Grid>
           <Button
             type="submit"
@@ -240,17 +228,15 @@ export default function EditProfile(props) {
           </Button>
 
           <Grid container>
-              <Grid item xs>
-              <Link to={`/editpw/${user.id}`}>                
-                 Modifier votre mot de passe ?
-                </Link>
-              </Grid>
-              <Grid item>
-              <Link to={`/editavatar/${user.id}`}> 
-                 Modifier votre avatar ?
-                </Link>
-              </Grid>
+            <Grid item xs>
+              <Link to={`/editpw/${user.id}`}>
+                Modifier votre mot de passe ?
+              </Link>
             </Grid>
+            <Grid item>
+              <Link to={`/editavatar/${user.id}`}>Modifier votre avatar ?</Link>
+            </Grid>
+          </Grid>
         </form>
       </div>
       <Box mt={5}></Box>

@@ -111,11 +111,12 @@ const Home = () => {
           <Slider {...settings}>
             {isGood.map((recette) => (
               <>
-                <Link to={`/recettes/${recette.id}`}>{recette.titre}</Link>
+                <Link to={`/recettes/${recette.id}`}>{recette.titre}
                 <img
                   src={"http://localhost:8000/uploads/" + recette.imgRecette}
                   alt="imagerecette"
                 />
+                </Link>
                 <li>
                   <RatingView ratingValue={recette.avgRatings} />
                 </li>
@@ -149,7 +150,16 @@ const Home = () => {
                   />
                 </FrontSide>
                 <BackSide>
-                  <div className="backside">{produit.nom}</div>
+                  
+                  <div className="backside">{produit.nom}
+                  
+                  <button className="custom-btn btn-6">
+                  <Link to={`/produits/${produit.id}`}>
+                    <span>Read More</span>
+                    </Link>
+                    </button>
+                  
+                  </div>
                 </BackSide>
               </Flippy>
             </div>

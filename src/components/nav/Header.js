@@ -13,7 +13,12 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { TestConsoleLogUsers } from "../../contexts/TestUserContext";
 
+
+
+
 const Header = () => {
+
+
   const user = TestConsoleLogUsers();
   const history = useHistory()
   const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
@@ -52,7 +57,7 @@ const Header = () => {
   }, []);
 
   useEffect(() => {
-    if (size.width > 768 && menuOpen) {
+    if (size.width > 950 && menuOpen) {
       setMenuOpen(false);
     }
   }, [size.width, menuOpen]);
@@ -85,7 +90,7 @@ const Header = () => {
       <div className={classes.header__content}>
         <nav
           className={`${classes.header__content__nav} ${
-            menuOpen && size.width < 768 ? classes.isMenu : ""
+            menuOpen && size.width < 950 ? classes.isMenu : ""
           }`}
         >
           <ul>
@@ -147,25 +152,27 @@ const Header = () => {
                         "aria-labelledby": "basic-button",
                       }}
                     >
-                     
+                        <MenuItem onClick={handleClose}>
+                        <Link to={`/profile/${user.id}`} onClick={menuToggleHandler}>
+                        Profil
+                        </Link>                        
+                      </MenuItem>
 
                       <MenuItem onClick={handleClose}>                       
                         <Link to={`/edit/${user.id}`} onClick={menuToggleHandler}>
-                          Modifier mon profil
+                          Edit Profil
                         </Link>
                       </MenuItem>
 
+                   
+
                       <MenuItem onClick={handleClose}>
                         <Link to={`/step1`} onClick={menuToggleHandler}>
-                        Ajouter une recette
+                        Add Recette
                         </Link>                        
                       </MenuItem>
 
-                      <MenuItem onClick={handleClose}>
-                        <Link to={`/profile/${user.id}`} onClick={menuToggleHandler}>
-                        Mon compte
-                        </Link>                        
-                      </MenuItem>
+                 
                      
 
                       {

@@ -1,20 +1,3 @@
-/*
-
-All grid code is placed in a 'supports' rule (feature query) at the bottom of the CSS (Line 310). 
-        
-The 'supports' rule will only run if your browser supports CSS grid.
-
-Flexbox and floats are used as a fallback so that browsers which don't support grid will still recieve a similar layout.
-
-*/
-
-/* Base Styles */
-
-
-
-
-    
-
 
 .container-profile {
     max-width: 93.5rem;
@@ -23,14 +6,18 @@ Flexbox and floats are used as a fallback so that browsers which don't support g
     font-size: 10px;
 }
 
-.btn {
-    display: inline-block;
-    font: inherit;
-    background: none;
-    border: none;
-    color: inherit;
-    padding: 0;
-    cursor: pointer;
+// .btn {
+//     display: inline-block;
+//     font: inherit;
+//     background: none;
+//     border: none;
+//     color: inherit;    
+//     cursor: pointer;
+// }
+
+.btn{
+    
+    margin-bottom:1px;
 }
 
 .btn:focus {
@@ -304,13 +291,7 @@ Flexbox and floats are used as a fallback so that browsers which don't support g
     }
 }
 
-/*
 
-The following code will only run if your browser supports CSS grid.
-
-Remove or comment-out the code block below to see how the browser will fall-back to flexbox & floated styling. 
-
-*/
 
 @supports (display: grid) {
     .profile {

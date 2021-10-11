@@ -6,13 +6,13 @@ import { TestConsoleLogUsers } from "../contexts/TestUserContext";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Rating, RatingView } from "react-simple-star-rating";
+import Pagination from "./Pagination";
 
 const RecetteDetail = ({ match }) => {
   const user = TestConsoleLogUsers();
-  console.log("userRecette: ", user);
   const [body, setBody] = useState();
   const [recette, setRecette] = useState([]);
-  const [commentaires, setCommentaires] = useState([]);
+  const [data, setData] = useState([]);
   const [rating, setRating] = useState(0);
   // const [commentIndex, setCommentIndex] = useState(null);
   const [deletedId, setDeletedId] = useState(null);
@@ -20,8 +20,10 @@ const RecetteDetail = ({ match }) => {
   const [editedComment, setEditedComment] = useState(null);
   const [editedRating, setEditedRating] = useState(null);
 
+ 
+
   const updateComment = (event) => {
-    setCommentaires((commentaires) =>
+    setData((commentaires) =>
       commentaires.map((c) => {
         if (c.id === editedId) {
           c.contenu = editedComment;
@@ -54,12 +56,20 @@ const RecetteDetail = ({ match }) => {
       .then((r) => {
         // console.log(3, r.data)
         setRecette(r.data);
-        setCommentaires(r.data.commentaires);
+        setData(r.data.commentaires);
+        setCurrentPage(1);
         // console.log(4, recette)
       });
   }, []);
 
-  // console.log(5, commentaires)
+  // PAGINATION
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+  const paginatedData = Pagination.getData(data, currentPage, itemsPerPage);
 
   const handleRating = (rate) => {
     setRating(rate);
@@ -91,8 +101,8 @@ const RecetteDetail = ({ match }) => {
         },
       })
       .then((r) => {
-        setCommentaires([
-          ...commentaires,
+        setData([
+          ...data,
           {
             ...newComment,
             id: r.data.id,
@@ -119,12 +129,14 @@ const RecetteDetail = ({ match }) => {
       })
       .then((r) => {
         // console.log(r)
-        commentaires.splice(index, 1);
-        setCommentaires(commentaires);
+        data.splice(index, 1);
+        setData(data);
         setDeletedId(id);
       });
     toast.success("Commentaire supprimé");
   };
+
+  console.log(1, currentPage, itemsPerPage);
 
   return (
     <>
@@ -149,18 +161,19 @@ const RecetteDetail = ({ match }) => {
                 </Link>
               )}
             </span>
-          
+
             <span>
               <strong>Type : </strong>
               {recette.types}
             </span>
             <span>
-            <RatingView ratingValue={recette.avgRatings} />
+              <RatingView ratingValue={recette.avgRatings} />
             </span>
           </div>
         </div>
 
         <div className="recette-etapes">
+          
           <div className="recette-info">
             <div className="recette-prep">
               <span>
@@ -181,6 +194,7 @@ const RecetteDetail = ({ match }) => {
               <span>{recette.portion} personnes</span>
             </div>
           </div>
+       
           <div className="recette-etapes_left">
             <h2>Les étapes de la recette</h2>
             {recette.etapes}
@@ -197,6 +211,8 @@ const RecetteDetail = ({ match }) => {
               </span>
             </div>
           </div>
+          
+
           <div className="progress-bar"></div>
           <div className="commentaires-container_left">
             <p className="commentaires-title">
@@ -230,12 +246,13 @@ const RecetteDetail = ({ match }) => {
               </p>
             </form>
           </div>
+
           <div className="commentaires-container_right">
             <p className="commentaires-title_right">
               <h2>Avis des utilisateurs</h2>
             </p>
 
-            {commentaires.map((c, index) => (
+            {paginatedData.map((c, index) => (
               <div key={index}>
                 <div className="commentaires">
                   <div className="comment-user-avatar-container">
@@ -247,13 +264,12 @@ const RecetteDetail = ({ match }) => {
                     />
                   </div>
                   <div className="comment-user-info-container">
+                    {c.author && (
+                      <Link to={`/profile/${c.author.id}`}>
+                        {c.author.fullName}
+                      </Link>
+                    )}
 
-                  {c.author && (
-                <Link to={`/profile/${c.author.id}`}>
-                  {c.author.fullName}
-                </Link>
-              )}
-                    
                     <span>
                       {new Date(c.createdAt).toLocaleString(undefined)}
                     </span>
@@ -313,12 +329,16 @@ const RecetteDetail = ({ match }) => {
                 </div>
               </div>
             ))}
-            {commentaires.length > 2 && (
-              <button type="submit" className="btnAvis">
-                Voir tous les avis
-              </button>
-            )}
+                    {itemsPerPage < data.length && (
+            <Pagination
+              currentPage={currentPage}
+              itemsPerPage={itemsPerPage}
+              length={data.length}
+              onPageChanged={handlePageChange}
+            />
+          )}
           </div>
+  
         </div>
       </div>
     </>

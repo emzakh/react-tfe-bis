@@ -4,6 +4,7 @@
     width:100%;
     margin:0;
     padding:0;
+    overflow:hidden;
 
     .recette-titre{
         text-align: center;
@@ -54,6 +55,10 @@
         padding-bottom:1.875rem;
         padding-left:2.875rem;
         padding-right:2.875rem;
+        @media screen and (max-width: $medium) {
+            max-width: 90%;
+        }
+        
 
         .recette-info{
             width:100%;
@@ -67,11 +72,19 @@
                 justify-content:center;
                 text-align: center;
                 padding:1.5rem;
+            
+                   h3{
+                        @media screen and (max-width: $medium) {
+                            font-size:0.9rem;
+                        }
 
                 span{
                     margin-bottom: .625rem;
                     font-size: .875rem;
                     text-transform: uppercase;
+                    
+                 
+                    }
                 }
 
             }
@@ -95,45 +108,55 @@
 
 
         .recette-etapes_left{
-            margin-top: 1.875rem;
-            width:50%;               
+            width:60%; 
+            margin-top: 4rem;
+            display:flex;
+            flex-direction: column;
             white-space: pre-line;
+
+            @media screen and (max-width: 1000px) {
+             width: 100%;
+         }
             
 
             h2{
                 margin-bottom: 1.875rem;
+                @media screen and (max-width: 1000px) {
+                   
+                    text-align:center;
+                }
             }
 
         }
 
         .recette-etapes_right{
-            margin-top: 1.875rem;
-            width:50%;
+            width:40%; 
+            margin-top: 4rem;
             padding-left:2rem;
+            justify-content: center;
+            @media screen and (max-width: 1000px) {
+             width: 100%;
+         }
 
             
 
             h2{
                 margin-bottom: 1.875rem;
+                text-align:center;
             }
 
            .recette-ingredients_list{
-            border: .0625rem solid rgba(30,46,7,.1);
+           
             text-align: center;
             
 
             li{
-                border-bottom: .0625rem solid rgba(30,46,7,.1);                
+                       
                 padding:1rem;
                 white-space: wrap;
                 font-size: 1.1rem;
                 
             }
-           
-            li:last-child{
-                border-bottom: 0;
-            }
-
            
             
            }
@@ -155,6 +178,7 @@
 
                @media screen and (max-width: $medium) {
                 width: 100%;
+                margin-top:1rem;
             }
 
                label{
@@ -214,9 +238,11 @@
             .commentaires-container_right{
                width:60%; 
                margin-top: 4rem;
-               padding-left:2rem;
-               @media screen and (max-width: $medium) {
+               
+               @media screen and (max-width: 1000px) {
                 width: 100%;
+                margin-top:1rem;
+                padding:0;
             }
 
                .commentaires-title_right{
@@ -251,6 +277,13 @@
 .commentaires{
     display:flex;
     flex-wrap: wrap;
+    margin-bottom:10px;
+    padding:10px;
+    @media screen and (max-width: 660px) {
+        flex-direction: column;
+    }
+    
+
  
 
     .comment-user-avatar-container{
@@ -267,6 +300,9 @@
         flex-direction: column;
         display:flex;
         width:80%;
+        @media screen and (max-width: 660px) {
+            width:100%;
+        }
 
         span{
         font-size: .875rem;
@@ -274,7 +310,7 @@
         }
 
         .contenu{
-            margin-bottom:3rem;
+            margin-bottom:1.5rem;
             white-space: pre-line;
             font-weight: 400;
         }

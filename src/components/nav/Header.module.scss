@@ -55,6 +55,13 @@
                 height: 100%;
                 position: static;
             }
+
+
+            // .menuDropDown{
+            //     display:flex;
+            //     background-color: red;
+            //     flex-direction: column;
+            // }
             //aller chercher l'enfant > 
             > ul {
                 
@@ -111,7 +118,7 @@
                             display:flex;
                             padding:0;
                         }
-                        @media screen and (max-width: $nav48) {
+                        @media screen and (max-width: 950px) {
                             justify-content: center;
                         }
 
@@ -166,13 +173,12 @@
             }
         }
     }
+    
 }
-.testScss{
-    background-color:red;
-    display:flex;
-    height:300px;
-    width:300px;
-    position:absolute;
-    flex-grow:1;
-    justify-content: flex-end;
+.css-6hp17o-MuiList-root-MuiMenu-list{
+    background-color:red !important;
+    display:flex !important;
+    flex-direction: column !important;
 }
+
+

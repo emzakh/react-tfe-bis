@@ -9,7 +9,7 @@
   margin-top: 1.1rem;
   color:white;
   display: flex;  
-  @media screen and (max-width: $nav48) {
+  @media screen and (max-width: 950px) {
     justify-content: center;
 }
 }

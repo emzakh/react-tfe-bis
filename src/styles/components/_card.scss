@@ -17,8 +17,7 @@
     img {
       object-fit: contain;
       height: 230px;
-      width:200px;
-      
+      width:200px;      
     }
     
     .data-container {
@@ -39,6 +38,7 @@
       ul {
         color: $color-2;
         padding-top: 100px;
+        padding-left:0;  
         display: grid;
         height: 100%;
         width: 100%;

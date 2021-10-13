@@ -111,7 +111,9 @@ const Home = () => {
           <Slider {...settings}>
             {isGood.map((recette) => (
               <>
-                <Link to={`/recettes/${recette.id}`}>{recette.titre}
+                <Link to={`/recettes/${recette.id}`}>
+                  
+                  {recette.titre}
                 <img
                   src={"http://localhost:8000/uploads/" + recette.imgRecette}
                   alt="imagerecette"

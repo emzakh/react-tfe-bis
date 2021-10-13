@@ -290,7 +290,7 @@ export const Step2 = () => {
       {/* <Navigation/> */}
       <MainContainer>
         <Typography component="h2" variant="h5">
-          Step 2
+        Etape 1
         </Typography>
         <HeaderWizard />
         <Form onSubmit={handleSubmit(onSubmit)}>

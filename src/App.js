@@ -70,6 +70,7 @@ const App = () => {
                 <Route path="/step3" component={Step3} />
                 <Route path="/result" component={Result} />
               </DataProvider>
+              
             <Route component={NotFound} />           
           </Switch>
           <ToastContainer position={toast.POSITION.BOTTOM_LEFT} />

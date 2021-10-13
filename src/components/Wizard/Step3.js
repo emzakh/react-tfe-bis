@@ -32,7 +32,7 @@ export const Step3 = () => {
      {/* <Navigation/> */}
         <MainContainer>
             <Typography component="h2" variant="h5">
-                Step 3
+            Etape 3
             </Typography>
              <HeaderWizard/> 
             <Form onSubmit={handleSubmit(onSubmit)}>

@@ -16,6 +16,7 @@
 }
 
 .input-home-search{
+  
     color:black;
     
 }
@@ -81,19 +82,24 @@ input:focus {
   height: 50px;
   display: flex;
   align-items: center;
-  color: black;
-}
-
-.HomeDataItem p {
   margin-left: 10px;
-}
-a {
-  text-decoration: none;
+  transition: all .5s ease-in-out;
+  color: black;
+  a:hover {
+    padding:10px;
+    background-color: lightgrey;
+    border-radius:15px;
+    
+  }
+
+
+
 }
 
-a:hover {
-  background-color: lightgrey;
-}
+
+
+
+
 
 #clearBtn {
   cursor: pointer;

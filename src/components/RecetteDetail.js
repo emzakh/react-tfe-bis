@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Rating, RatingView } from "react-simple-star-rating";
 import Pagination from "./Pagination";
+import Grid from "@material-ui/core/Grid";
 
 const RecetteDetail = ({ match }) => {
   const user = TestConsoleLogUsers();
@@ -219,32 +220,44 @@ const RecetteDetail = ({ match }) => {
               {
                 //check si y'a user
                 user.firstName ? (
+                  <>
                   <h2>{user.firstName}, laissez votre avis !</h2>
+                  <label>Notez la recette</label>
+                  <Rating
+                    onClick={handleRating}
+                    ratingValue={rating} /* Rating Props */
+                  />
+                  <label>Votre commentaire</label>
+      
+                  <form onSubmit={handleSubmit}>
+                    <textarea
+                      id="comment"
+                      name="contenu"
+                      placeholder="Laissez votre commentaire"
+                      onChange={handleChange}
+                    />
+                    <p className="form-submit">
+                      <button type="submit" className="btnSubmit">
+                        Poster
+                      </button>
+                    </p>
+                  </form>
+                  </>
                 ) : (
-                  <h2>Enregistrez vous pour laissez votre avis !</h2>
+                  <Grid container  direction="column" spacing={2}>
+                  <Grid item>
+                  <Link to="/auth">Vous avez déjà un compte ? Connectez-vous pour laisser un avis !</Link>            
+                  </Grid>
+                  <Grid item>
+                <Link to="/register">
+                  Pas encore de compte ? Créez en un !
+                </Link>
+              </Grid>
+                </Grid>
                 )
               }
             </p>
-            <label>Notez la recette</label>
-            <Rating
-              onClick={handleRating}
-              ratingValue={rating} /* Rating Props */
-            />
-            <label>Votre commentaire</label>
-
-            <form onSubmit={handleSubmit}>
-              <textarea
-                id="comment"
-                name="contenu"
-                placeholder="Laissez votre commentaire"
-                onChange={handleChange}
-              />
-              <p className="form-submit">
-                <button type="submit" className="btnSubmit">
-                  Poster
-                </button>
-              </p>
-            </form>
+   
           </div>
 
           <div className="commentaires-container_right">

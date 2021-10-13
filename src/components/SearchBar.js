@@ -4,14 +4,11 @@ import axios from "axios";
 import {Link} from 'react-router-dom';
 
 
-const Search = () => {
- 
+const Search = () => { 
 
     const [searchTerm, setSearchTerm] = useState("");
-    const [fusion, setFusion] = useState([]);
-    //const fusion = [];
-  
-  
+    const [fusion, setFusion] = useState([]); 
+
     useEffect(() => {
       axios
         .all([
@@ -26,16 +23,13 @@ const Search = () => {
             ])             
           })
         );
-    }, []);
-   // item.nom.includes(searchTerm.toLowerCase()) || item.titre.includes(searchTerm.toLowerCase())
-
+    }, []); 
     
 
   return (
     <>
     <div className="search-container">
-      <input className="search-input" type="text" placeholder="Search..." onChange={(event) => {setSearchTerm(event.target.value);}}/>
-      
+      <input className="search-input" type="text" placeholder="Search..." onChange={(event) => {setSearchTerm(event.target.value);}}/>      
         {
         fusion.filter((item) => {
             if (searchTerm === "") {                
@@ -52,8 +46,7 @@ const Search = () => {
             }
           )
           .map((item) => (          
-            <div className="search-result" key={item.id}>                
-            
+            <div className="search-result" key={item.id}>
             <Link to={`/produits/${item.id}`}>{item.nom}</Link>
             <Link to={`/recettes/${item.id}`}>{item.titre}</Link>
             </div>

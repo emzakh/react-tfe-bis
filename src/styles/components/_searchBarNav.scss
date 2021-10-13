@@ -69,18 +69,19 @@ input:focus {
   display: flex;
   align-items: center;
   color: black;
+  a:hover {
+    background-color: lightgrey;
+  }
 }
+
 
 .dataItem p {
   margin-left: 10px;
-}
-a {
-  text-decoration: none;
+  
 }
 
-a:hover {
-  background-color: lightgrey;
-}
+
+
 
 #clearBtn {
   cursor: pointer;

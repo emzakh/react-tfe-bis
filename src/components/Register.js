@@ -271,8 +271,7 @@ const RegisterPage = ({history}) => {
     </Button>
     <Grid container justify="flex-end">
       <Grid item>
-      <Link to="/login">Vous avez déjà un compte ? Connectez-vous</Link>
-
+      <Link to="/auth">Vous avez déjà un compte ? Connectez-vous</Link>
       </Grid>
     </Grid>
   </form>

@@ -5,15 +5,30 @@
     padding-top:2rem;   
     
 
+  
+
+ button{
+     color: #202f0a !important;
+     border-color: white!important;
+ }
+
     .disabled{
         display:none;
     }  
 
-
+    .page-item{
+        background-color:red !important;
+        color:red !important;
+        border-color: white!important;
+    }
     .active button{
-        background-color: $color-3;     
-        color:$color-5;  
-     
+     background-color:#202f0a!important;
+     color:white!important;
+     text-decoration:none!important;
+     border-color: white!important;
+    }
+    .page-link{
+        border-color: white!important;
     }
 
 
@@ -21,8 +36,7 @@
         display:flex;
         justify-content: center;     
         border:none;
-        font-family:$font-1;  
-        background-color:$color-2;
+        font-family:$font-1;          
         cursor:pointer;      
         width:1.3rem;    
         padding-left: 1rem;

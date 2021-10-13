@@ -7,8 +7,7 @@ const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(3,0,2),
         textAlign:"center",
         fontSize:"40px",
-        color:"deeppink",
-        textShadow:"1px 1px darkmagenta"
+      
     }
 }))
 
@@ -17,7 +16,7 @@ export const HeaderWizard = () => {
     const styles = useStyles()
     return(
         <Typography className={styles.root} component="h1">
-            Recette Wizardos
+            Ajouter une recette
         </Typography>
     )
 }

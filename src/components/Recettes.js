@@ -6,7 +6,7 @@ import Pagination from "./Pagination";
 const Recettes = () => {
   const [data, setData] = useState([]);
   const [selectedRadio, setSelectedRadio] = useState("");
-  const radios = ["Plat", "Boisson", "Dessert", "Toutes les recettes"];
+  const radios = ["Plat", "Boisson", "Dessert", "All"];
 
   //pagination
   const [currentPage, setCurrentPage] = useState(1);
@@ -37,7 +37,7 @@ const Recettes = () => {
 
   const handleSelectFilter = (event) => {
     const value = event.currentTarget.value;    
-    if(value === "Toutes les recettes"){
+    if(value === "All"){
       setSelectedRadio("")
     }else{
       setSelectedRadio(value);

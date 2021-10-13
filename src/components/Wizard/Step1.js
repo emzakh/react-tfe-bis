@@ -41,8 +41,6 @@ export const Step1 = () => {
   });
   const history = useHistory();
   const onSubmit = (data) => {
-    console.log(1, history)
-    console.log(2, data)
     history.push("/step2");
     setValues(data);
   };
@@ -51,7 +49,7 @@ export const Step1 = () => {
       {/* <Navigation /> */}
       <MainContainer>
         <Typography component="h2" variant="h5">
-          Step 1
+          Etape 1
         </Typography>
         <HeaderWizard />
         <Form onSubmit={handleSubmit(onSubmit)}>

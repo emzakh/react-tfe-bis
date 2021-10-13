@@ -17,14 +17,12 @@ import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import { TestConsoleLogUsers } from "../contexts/TestUserContext";
 
-
 const LoginPage = (props) => {
-
- const user = TestConsoleLogUsers();
- console.log('userLogin:', user)
+  const user = TestConsoleLogUsers();
+  console.log("userLogin:", user);
 
   const theme = createTheme();
-  
+
   const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
 
   const [credentials, setCredentials] = useState({
@@ -44,13 +42,15 @@ const LoginPage = (props) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-    console.log('isauth', isAuthenticated)
+      console.log("isauth", isAuthenticated);
       await authAPI.authenticate(credentials);
       setIsAuthenticated(true);
       toast.success("Vous êtes connecté");
       props.history.replace(`/`);
     } catch (error) {
-        toast.error("Aucun compte ne possède cette adresse e-mail ou les informations ne correspond pas")
+      toast.error(
+        "Aucun compte ne possède cette adresse e-mail ou les informations ne correspond pas"
+      );
     }
   };
   return (

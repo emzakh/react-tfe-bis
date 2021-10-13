@@ -204,8 +204,8 @@ export const Result = () => {
             </List>
           </>
         )}
-        <PrimaryButton onClick={onSubmit}>Submit</PrimaryButton>
-        <Link to="/step1">Start over</Link>
+        <PrimaryButton onClick={onSubmit}>Envoyer</PrimaryButton>
+        <Link to="/step1">Revenir au début</Link>
       </MainContainer>
     </>
   );

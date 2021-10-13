@@ -5,7 +5,6 @@ import { HeaderWizard } from "./HeaderWizard";
 import { MainContainer } from "./MainContainer";
 import { Form } from "./Form";
 import { Input } from "./Input";
-import {FormLabel} from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 
 import * as yup from "yup";

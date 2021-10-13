@@ -275,8 +275,6 @@ export const Step2 = () => {
   });
 
   const onSubmit = (data) => {
-    console.log(3, history);
-    console.log(4, data);    
     let modifiedData = Object.assign({}, data); // copie non liée d'un objet 'deep clone'
     modifiedData.ingredients = sel // assignation de la nouvelle valeur 'ingredients'
     history.push("./step3");

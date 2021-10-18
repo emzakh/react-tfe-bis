@@ -16,11 +16,7 @@
         display:none;
     }  
 
-    .page-item{
-        background-color:red !important;
-        color:red !important;
-        border-color: white!important;
-    }
+
     .active button{
      background-color:#202f0a!important;
      color:white!important;
@@ -49,8 +45,7 @@
         font-weight:lighter;
  
       
-        &:hover{
-         background-color:$color-3;
+        &:hover{        
          transition: 0.6s;
          border-radius: 4px;       
          color:$color-5;  

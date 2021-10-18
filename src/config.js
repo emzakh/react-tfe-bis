@@ -1,6 +1,5 @@
-export const API_URL = "http://localhost:8000/api/"
- // puis on va dans webpack.config.js :
- 
+export const API_URL = "http://hildegarde.massimino.be/api/"
+
 
 export const USERS_API = API_URL + "users"
 

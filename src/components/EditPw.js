@@ -4,7 +4,6 @@ import { useLoginContext } from "../contexts/LoginContext";
 import Axios from "axios";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import { Link, useHistory } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
@@ -46,7 +45,6 @@ export default function Editpw(props) {
   const history = useHistory()
   // const users = TestConsoleLogUsers();
   const user = useLoginContext();
-  console.log("user", user);
 
   const [profile, setProfile] = useState({
     oldPassword: user.oldPassword,
@@ -71,7 +69,7 @@ export default function Editpw(props) {
 
     try {
       await Axios.put(
-        `http://localhost:8000/api/users/updatepw/${user.id}`,
+        `http://hildegarde.massimino.be/api/users/updatepw/${user.id}`,
         profile,
         {
           headers: {
@@ -82,7 +80,7 @@ export default function Editpw(props) {
       );
       // setErrors({})
 
-      // await Axios.post(`http://localhost:8000/api/users/${user.id}`)
+      // await Axios.post(`http://hildegarde.massimino.be/api/users/${user.id}`)
       
       
       toast.success("Profil modifié");
@@ -100,13 +98,11 @@ export default function Editpw(props) {
       toast.error("Des erreurs dans votre formulaire...");
     }
   };
-  console.log("user:", user);
-  console.log("item:", profile);
+
 
   return (
     // <form className={classes.root} onSubmit={handleSubmit} encType="multipart/form-data">
     <Container component="main" maxWidth="xs">
-      <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />

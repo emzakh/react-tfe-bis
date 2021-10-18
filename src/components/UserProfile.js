@@ -64,21 +64,18 @@ const UserProfilePage = ({ history, match }) => {
     presentation: "",
     fullName: "",
   });
-  console.log(user);
 
   useEffect(() => {
     const fetchItem = async () => {
       const fetchItem = await axios.get(
-        `http://localhost:8000/api/users/${match.params.id}`
+        `http://hildegarde.massimino.be/api/users/${match.params.id}`
       );
       const dataItem = await fetchItem.data;
       setItem(dataItem);
-      console.log(dataItem);
     };
     fetchItem();
   }, [match.params.id]);
 
-  console.log(12, item);
 
   return (
     <>
@@ -87,7 +84,7 @@ const UserProfilePage = ({ history, match }) => {
           <div className="profile">
             <div className="profile-image">
               <img
-                src={"http://localhost:8000/uploads/" + item.picture}
+                src={"http://hildegarde.massimino.be/uploads/" + item.picture}
                 alt="imgavatar"
               />
             </div>
@@ -156,11 +153,10 @@ const UserProfilePage = ({ history, match }) => {
                 <div className="profile-recettes">
                   {item.recettes.map((recette) => (
                     <div key={recette.id}>
-                      {console.log(recette.types)}
                       <li className="card-produit-recette">
                         <img
                           src={
-                            "http://localhost:8000/uploads/" +
+                            "http://hildegarde.massimino.be/uploads/" +
                             recette.imgRecette
                           }
                           className="card-img-recette"
@@ -228,7 +224,7 @@ const UserProfilePage = ({ history, match }) => {
 
                       {/* <img
                           src={
-                            "http://localhost:8000/uploads/" +
+                            "http://hildegarde.massimino.be/uploads/" +
                             recette.imgRecette
                           }
                           className="card-img-recette"

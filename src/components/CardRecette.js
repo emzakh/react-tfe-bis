@@ -8,7 +8,7 @@ const CardRecette = (props) => {
   return (
     <li className="cardRecette">
       <img
-        src={"http://localhost:8000/uploads/" + recette.imgRecette}
+        src={"http://hildegarde.massimino.be/uploads/" + recette.imgRecette}
         className="card-img-recette"
         alt="imageproduit"
       />

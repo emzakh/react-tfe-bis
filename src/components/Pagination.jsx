@@ -33,7 +33,6 @@ Pagination.getData = (items, currentPage, itemsPerPage) => {
     // array.slice(debut,fin)
     const start = currentPage * itemsPerPage - itemsPerPage
     //     20   =      3      *     10       -  10          
-    console.log('PAGINATION', items)
     return items.slice(start, start + itemsPerPage)
 }
  

@@ -1,7 +1,6 @@
 import React, { useState, useEffect, Component } from "react";
 import axios from "axios";
 import Flippy, { FrontSide, BackSide } from "react-flippy";
-import Card from "../components/Card";
 import { TestConsoleLogUsers } from "../contexts/TestUserContext";
 import SearchHomeBar from "../components/search/Search";
 import Slider from "react-slick";
@@ -45,9 +44,6 @@ const Home = () => {
     ],
   };
 
-  const user = TestConsoleLogUsers();
-  console.log("UserHomepage", user);
-
   const [recette, setRecette] = useState([]);
   const [produits, setProduits] = useState([]);
 
@@ -55,8 +51,8 @@ const Home = () => {
   useEffect(() => {
     axios
       .all([
-        axios.get("http://localhost:8000/api/produits"),
-        axios.get("http://localhost:8000/api/recettes"),
+        axios.get("http://hildegarde.massimino.be/api/produits"),
+        axios.get("http://hildegarde.massimino.be/api/recettes"),
       ])
       .then(
         axios.spread((obj1, obj2) => {
@@ -70,30 +66,22 @@ const Home = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/recettes")
+      .get("http://hildegarde.massimino.be/api/recettes")
       .then((res) => res.data["hydra:member"])
       .then((data) => setRecette(data));
   }, []);
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/produits")
+      .get("http://hildegarde.massimino.be/api/produits")
       .then((res) => res.data["hydra:member"])
       .then((data) => setProduits(data));
   }, []);
 
-  console.log(recette);
 
-  // const isGood = data.map((recette)=>{
-  //   if (recette.avgRatings > "3"){
-
-  //   }
-  // })
 
   const isGood = recette.filter((data) => data.avgRatings > "3");
-  console.log(isGood);
 
   const deSaison = produits.filter((data) => data.saison === "Toute l'année");
-  console.log("desaison", deSaison);
 
   return (
     <>
@@ -111,14 +99,14 @@ const Home = () => {
           <Slider {...settings}>
             {isGood.map((recette) => (
               <>
-                <Link to={`/recettes/${recette.id}`}>
-                  
-                  {recette.titre}
+                <Link to={`/recettes/${recette.id}`}>                  
+                  <h4>{recette.titre}</h4>
+                </Link>
                 <img
-                  src={"http://localhost:8000/uploads/" + recette.imgRecette}
+                  src={"http://hildegarde.massimino.be/uploads/" + recette.imgRecette}
                   alt="imagerecette"
                 />
-                </Link>
+             
                 <li>
                   <RatingView ratingValue={recette.avgRatings} />
                 </li>
@@ -147,7 +135,7 @@ const Home = () => {
                 // }}
                 >
                   <img
-                    src={"http://localhost:8000/uploads/" + produit.image}
+                    src={"http://hildegarde.massimino.be/uploads/" + produit.image}
                     alt="imagerecette"
                   />
                 </FrontSide>

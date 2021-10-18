@@ -25,7 +25,7 @@ const ProduitDetail = ({ match }) => {
   useEffect(() => {
     const fetchItem = async () => {
       const fetchItem = await axios.get(
-        `http://localhost:8000/api/produits/${match.params.id}`
+        `http://hildegarde.massimino.be/api/produits/${match.params.id}`
       );
       const dataItem = await fetchItem.data;
       setItem(dataItem);
@@ -52,33 +52,33 @@ const ProduitDetail = ({ match }) => {
               <strong>Saison</strong>
               <span>{item.saison}</span>
             </div>
-
+           
             <div className="produit-col">
-              <i className="fas fa-calendar"></i>
+              <i className="fas fa-map-marker-alt"></i>
               <strong>Cultivé</strong>
               <span>{item.cultivation}</span>
             </div>
 
             <div className="produit-col">
-              <i className="fas fa-calendar"></i>
+              <i className="far fa-clock"></i>
               <strong>Conservation</strong>
               <span>{item.conservation}</span>
             </div>
 
             <div className="produit-col">
-              <i className="fas fa-calendar"></i>
+              <i className="fas fa-utensils"></i>
               <strong>Apport</strong>
               <span>{item.apport}</span>
             </div>
 
             <div className="produit-col">
-              <i className="fas fa-calendar"></i>
+              <i className="fas fa-heart"></i>
               <strong>Vitamine</strong>
               <span>{item.vitamine}</span>
             </div>
 
             <div className="produit-col">
-              <i className="fas fa-calendar"></i>
+              <i className="fas fa-baby"></i>
               <strong>A partir de</strong>
               <span>{item.bebe}</span>
             </div>
@@ -86,7 +86,7 @@ const ProduitDetail = ({ match }) => {
           </div>
 
           <div className="nutriscore-icon">
-            <i className="fas fa-calendar"></i>
+            <i className="fas fa-weight-hanging"></i>
             <strong>Nutriscore</strong>
           </div>
 
@@ -133,13 +133,8 @@ const ProduitDetail = ({ match }) => {
      {item.recettesAssociees.map((recette) => (
        <div key={recette.id}>
          <li className="card-produit-recette">
-           <img src={"http://localhost:8000/uploads/" + recette.imgRecette} className="card-img-recette" alt="imagerecette"/>
+           <img src={"http://hildegarde.massimino.be/uploads/" + recette.imgRecette} className="card-img-recette" alt="imagerecette"/>
            <Link to={`/recettes/${recette.id}`}>
-             <div className="data-container">
-               <ul>
-                 <li>{recette.types}</li>
-               </ul>
-             </div>
              <div className="productNameCard">{recette.titre}</div>
            </Link>
          </li>

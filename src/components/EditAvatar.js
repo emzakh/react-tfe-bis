@@ -4,7 +4,7 @@ import { Link, useHistory } from "react-router-dom";
 import Axios from "axios";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
+
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
@@ -46,7 +46,6 @@ export default function EditAvatar(props) {
 
   // const users = TestConsoleLogUsers();
   const user = useLoginContext();
-  console.log('user', user)
 
   const [profile, setProfile] = useState({
     picture: user.picture, 
@@ -55,7 +54,6 @@ export default function EditAvatar(props) {
   const [fileName, setFileName] = useState();
 
   const fileSelectedHandler = (event) => {
-    console.log(event.target.files[0]);
     setProfile({ ...profile, picture: event.target.files[0] });
     setFileName(event.target.files[0].name);
   };
@@ -71,41 +69,32 @@ export default function EditAvatar(props) {
 
 
     try {
-      await Axios.post(`http://localhost:8000/api/users/updateavatar/${user.id}`, formData, {
+      await Axios.post(`http://hildegarde.massimino.be/api/users/updateavatar/${user.id}`, formData, {
         headers: {
             "Authorization": "Bearer " + window.localStorage.getItem("authToken"),
             "Content-Type": "multipart/form-data",
         },
       });
       for (var pair of formData.entries()) {
-        console.log("formData", pair[0] + ", " + pair[1]);
       }  
       
       toast.success("Profil modifié");
-      console.log('test reussi')
      
 
       history.push(`/edit/${user.id}`);
     } catch ({ response }) {
-      console.log(response);
       const { violations } = response.data;
       if (violations) {
-        // violations.forEach(({ propertyPath, message }) => {
-        //   apiErrors[propertyPath] = message;
-        // });
-        // setErrors(apiErrors);
         console.log(violations)
       }
       toast.error("Des erreurs dans votre formulaire...");
     }
   };
-  console.log("user:", user);
-  console.log("item:", profile);
 
   return (
     // <form className={classes.root} onSubmit={handleSubmit} encType="multipart/form-data">
     <Container component="main" maxWidth="xs">
-      <CssBaseline />
+      
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />

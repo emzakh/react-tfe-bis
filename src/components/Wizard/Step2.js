@@ -194,7 +194,7 @@ export const Step2 = () => {
 
   // useEffect(() => {
   // Axios
-  //   .get("http://localhost:8000/api/produits")
+  //   .get("http://hildegarde.massimino.be/api/produits")
   //   .then((res) => res.data["hydra:member"])
   //   .then((produit) => setProduit(produit));
   // }, []);
@@ -212,7 +212,7 @@ export const Step2 = () => {
 
   const fetchProduits = async () => {
     try {
-      Axios.get("http://localhost:8000/api/produits")
+      Axios.get("http://hildegarde.massimino.be/api/produits")
         .then((res) => res.data["hydra:member"])
         .then((produit) => setProduit(produit))
     } catch (error) {

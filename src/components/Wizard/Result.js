@@ -36,8 +36,6 @@ const useStyles = makeStyles({
 export const Result = () => {
   const user = TestConsoleLogUsers();
   console.log(user);
-  console.log(user.id);
-  console.log(`/api/users/${user.id}`);
   const styles = useStyles();
   const { data } = useData();
   const history = useHistory();
@@ -50,7 +48,7 @@ export const Result = () => {
 
   const fetchProduits = async () => {
     try {
-      Axios.get("http://localhost:8000/api/produits")
+      Axios.get("http://hildegarde.massimino.be/api/produits")
         .then((res) => res.data["hydra:member"])
         .then((produit) => setProduit(produit))
     } catch (error) {
@@ -62,15 +60,8 @@ export const Result = () => {
     fetchProduits();  
   }, []);
 
-  console.log('produit', produit)
-
-
-
-  console.log(420, entries)
-
   const onSubmit = async () => {
     let formData = new FormData();  
-
     try {
       if (data.files) {
         data.files.forEach((file) => {
@@ -80,12 +71,10 @@ export const Result = () => {
       entries.forEach((entry) => {
         console.log('entry', entry[0])
         if(entry[0]==="ingredients"){
-
           let simpleSel = entry[1].map(elem=>{
             return elem.id
           })
           entry[1] = simpleSel.join(',')
-
         }
         formData.append(entry[0], entry[1]);
       });
@@ -93,7 +82,7 @@ export const Result = () => {
         console.log(421, pair[0] + ", " + pair[1]);
       }
       await axios
-        .post("http://localhost:8000/api/recettes/new", formData, {
+        .post("http://hildegarde.massimino.be/api/recettes/new", formData, {
           headers: {           
             "Content-Type": "multipart/form-data",
             "Authorization": "Bearer " + window.localStorage.getItem("authToken"), 
@@ -114,10 +103,8 @@ export const Result = () => {
   };
 
   const RenderCorrectEntries = props => {
-    console.log('props: ', props.entries);
     props.entries.map((e) => {
       if (e[0] === 'ingredients') {
-        console.log('IF');
         return (
           <TableRow key={e[0]}>
             <TableCell component="th" scope="row">
@@ -127,7 +114,6 @@ export const Result = () => {
           </TableRow>
         )
       } else {
-        console.log('ELSE');
         return (
           <TableRow key={e[0]}>
             <TableCell component="th" scope="row">
@@ -138,7 +124,6 @@ export const Result = () => {
         )
       }
     })
-    console.log('NO IF');
   }
 
   return (
@@ -169,7 +154,6 @@ export const Result = () => {
                     </TableRow>
                   )
                 }
-                console.log('entry:' , entry);
 
 
                 return (

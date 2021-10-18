@@ -37,7 +37,7 @@ const RecetteDetail = ({ match }) => {
     event.preventDefault();
     axios
       .put(
-        "http://localhost:8000/api/commentaires/" + editedId,
+        "http://hildegarde.massimino.be/api/commentaires/" + editedId,
         { contenu: editedComment, rating: editedRating },
         {
           headers: {
@@ -53,7 +53,7 @@ const RecetteDetail = ({ match }) => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8000/api/recettes/${match.params.id}`)
+      .get(`http://hildegarde.massimino.be/api/recettes/${match.params.id}`)
       .then((r) => {
         // console.log(3, r.data)
         setRecette(r.data);
@@ -95,7 +95,7 @@ const RecetteDetail = ({ match }) => {
     };
 
     axios
-      .post("http://localhost:8000/api/commentaires", newComment, {
+      .post("http://hildegarde.massimino.be/api/commentaires", newComment, {
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
@@ -122,7 +122,7 @@ const RecetteDetail = ({ match }) => {
   const deleteComment = (id, index) => {
     // console.log(20, id, index)
     axios
-      .delete(`http://localhost:8000/api/commentaires/` + id, {
+      .delete(`http://hildegarde.massimino.be/api/commentaires/` + id, {
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
@@ -137,7 +137,6 @@ const RecetteDetail = ({ match }) => {
     toast.success("Commentaire supprimé");
   };
 
-  console.log(1, currentPage, itemsPerPage);
 
   return (
     <>
@@ -149,7 +148,7 @@ const RecetteDetail = ({ match }) => {
           </div>
 
           <img
-            src={"http://localhost:8000/uploads/" + recette.imgRecette}
+            src={"http://hildegarde.massimino.be/uploads/" + recette.imgRecette}
             alt="imagerecette"
           />
 
@@ -207,7 +206,15 @@ const RecetteDetail = ({ match }) => {
               <span>
                 {recette.ingredients &&
                   recette.ingredients.map((i, index) => (
-                    <Ingredient key={index} nom={i.nom} image={i.image} />
+                    <div key={i.id}>
+                    <li className="card-produit-recette">
+                    <Link to={`/produits/${i.id}`}> 
+                      <img src={"http://hildegarde.massimino.be/uploads/" + i.image} className="card-img-recette" alt="imageproduit"/>
+                                       
+                        <div className="productNameCard">{i.nom}</div>
+                      </Link>
+                    </li>
+                  </div>
                   ))}
               </span>
             </div>
@@ -269,10 +276,10 @@ const RecetteDetail = ({ match }) => {
               <div key={index}>
                 <div className="commentaires">
                   <div className="comment-user-avatar-container">
-                    {/* <img src={"http://localhost:8000/uploads/" + recette.imgRecette} alt="imagerecette" /> */}
+                    {/* <img src={"http://hildegarde.massimino.be/uploads/" + recette.imgRecette} alt="imagerecette" /> */}
 
                     <img
-                      src={"http://localhost:8000/uploads/" + c.author.picture}
+                      src={"http://hildegarde.massimino.be/uploads/" + c.author.picture}
                       alt="imgavatar"
                     />
                   </div>
@@ -303,7 +310,6 @@ const RecetteDetail = ({ match }) => {
                           name="contenu"
                           placeholder="Laissez votre commentaire"
                           onChange={(event) => {
-                            console.log(22, event.target.value);
                             setEditedComment(event.target.value);
                           }}
                         >

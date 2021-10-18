@@ -24,7 +24,7 @@ const TestUserContext = createContext(null)
         const fetchItem = async () => {
             if(user!=null){
                 const fetchItem = await axios.get(
-                  `http://localhost:8000/api/users/${user.id}`
+                  `http://hildegarde.massimino.be/api/users/${user.id}`
                 );
                 const dataItem = await fetchItem.data;
                 setItem(dataItem);

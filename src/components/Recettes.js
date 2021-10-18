@@ -16,7 +16,7 @@ const Recettes = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/recettes")
+      .get("http://hildegarde.massimino.be/api/recettes")
       .then((res) => res.data["hydra:member"])
       .then((data) => setData(data));
   }, []);

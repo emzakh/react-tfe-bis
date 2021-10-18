@@ -25,7 +25,6 @@ export const Step3 = () => {
         setValues(data);
     };
 
-    console.log(123, data)
 
     return (
         <>

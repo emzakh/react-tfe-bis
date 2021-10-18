@@ -16,7 +16,7 @@ const Produits = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/produits")
+      .get("http://hildegarde.massimino.be/api/produits")
       .then((res) => res.data["hydra:member"])
       .then((data) => setData(data));
   }, []);
@@ -46,7 +46,6 @@ const Produits = () => {
       setSelectedRadio(value);
     } 
     setCurrentPage(1);
-    // console.log(setSelectedRadio)
   };
 
  
@@ -64,7 +63,6 @@ const Produits = () => {
                   name="choice" // remplace mon truc checked debilos. Radio != checkbox
                   onChange={handleSelectFilter}
                 />
-                {console.log(radio)}
                 <label htmlFor={radio}>{radio}</label>
               </li>
             );

@@ -5,7 +5,7 @@ import { Link, useHistory } from "react-router-dom";
 import Axios from "axios";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
+
 import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
@@ -49,7 +49,6 @@ export default function EditProfile(props) {
   const history = useHistory()
   // const users = TestConsoleLogUsers();
   const user = useLoginContext();
-  console.log("user", user);
   const [profile, setProfile] = useState({
     firstName: user.firstName,
     lastName: user.lastName,
@@ -66,8 +65,6 @@ export default function EditProfile(props) {
     presentation: "",
   });
 
-  console.log(profile);
-
   const handleChange = (event) => {
     const { name, value } = event.currentTarget;
     setProfile({ ...profile, [name]: value });
@@ -75,7 +72,6 @@ export default function EditProfile(props) {
   const [fileName, setFileName] = useState();
 
   const fileSelectedHandler = (event) => {
-    console.log(event.target.files[0]);
     setProfile({ ...profile, picture: event.target.files[0] });
     setFileName(event.target.files[0].name);
   };
@@ -105,7 +101,7 @@ export default function EditProfile(props) {
 
     try {
       await Axios.put(
-        `http://127.0.0.1:8000/api/users/update/${user.id}`,
+        `http://hildegarde.massimino.be/api/users/update/${user.id}`,
         profile,
         {
           headers: {
@@ -133,7 +129,7 @@ export default function EditProfile(props) {
   return (
     // <form className={classes.root} onSubmit={handleSubmit} encType="multipart/form-data">
     <Container component="main" maxWidth="xs">
-      <CssBaseline />
+    
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />

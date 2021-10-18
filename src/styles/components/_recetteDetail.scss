@@ -14,7 +14,8 @@
         font-size: 1.475rem;
     
         h1{
-            margin-bottom:.0825rem;
+            margin-bottom: 0.5rem;
+            margin-top: 2rem;
         }       
 
         .recette-etapes_description{
@@ -25,7 +26,7 @@
             font-style:italic;         
             text-transform: uppercase;
             letter-spacing: .0825rem;
-            margin-bottom: 1rem;            
+            margin-bottom: 2rem;            
         }
 
         img{
@@ -75,7 +76,7 @@
             
                    h3{
                         @media screen and (max-width: $medium) {
-                            font-size:0.9rem;
+                            font-size:2.5rem;
                         }
 
                 span{
@@ -145,18 +146,113 @@
                 text-align:center;
             }
 
-           .recette-ingredients_list{
-           
+           .recette-ingredients_list{           
+            
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        
+
+            .card-produit-recette {
+                height: 100px;
+                width:150px;
+                position: relative;
+                margin: 10px;
+                box-shadow: rgb(38, 57, 77) 0px 10px 15px -5px;   
+                transition: 0.3s;                
+                overflow: hidden;
+                border-radius: 4px;
+                background-color: $color-5;
+                cursor: pointer;
+
+
+                &:hover {
+                    transform: scale(1.25);
+                    z-index: 2;
+                }
+
+                img {
+                    object-fit: cover;
+                    height: 230px;
+                    max-width: 100%;
+
+                }
+
+                .data-container {
+                    position: absolute;
+                    top: 0;
+                    opacity: 0;
+                    width: 100%;
+                    height: 100%;
+
+
+                    &:hover {
+                        opacity: 1;
+
+                        ul {
+                            transform: scaleY(1);
+                        }
+                    }
+
+                    ul {
+                        color: $color-2;
+                        padding-top:40px;
+                        display: grid;
+                        height: 100%;
+                        width: 100%;
+                        text-align: center;
+                        transition: 0.3s;
+                        transform: scaleY(0.3);
+                        z-index: 20;
+
+                        &:after {
+                            content: "";
+                            width: 100%;
+                            height: 100%;
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            transition: 0.6s;
+                        }
+
+                        &:hover::after {
+                            background: rgba(0, 0, 0, 0.65);
+                        }
+                    }
+
+                    li {
+                        font-size: 0.8rem;
+                        z-index: 30;
+
+                        &:nth-child(1) {
+                            font-weight: bold;
+                            color: $color-2;
+                        }
+                    }
+                }
+
+                .productNameCard {
+                    position: absolute;
+                    bottom: 0;
+                    font-weight: bold;
+                    font-size: 0.8rem;
+                    text-align: center;
+                    color: $color-2;
+                    background: rgba(0, 0, 0, 0.65);
+                    width: 100%;
+
+
+                    &:hover {
+                        background: none;
+
+                    }
+                }
+            }
             
 
-            li{
-                       
-                padding:1rem;
-                white-space: wrap;
-                font-size: 1.1rem;
-                
-            }
+      
            
             
            }
@@ -288,7 +384,8 @@
 
     .comment-user-avatar-container{
         width:20%;
-
+        display: flex;
+        justify-content: center;
         img{
             object-fit: cover;
             height: 100px;

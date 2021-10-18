@@ -12,8 +12,8 @@ const Search = () => {
     useEffect(() => {
       axios
         .all([
-          axios.get("http://localhost:8000/api/produits"),
-          axios.get("http://localhost:8000/api/recettes"),
+          axios.get("http://hildegarde.massimino.be/api/produits"),
+          axios.get("http://hildegarde.massimino.be/api/recettes"),
         ])
         .then(
           axios.spread((obj1, obj2) => {

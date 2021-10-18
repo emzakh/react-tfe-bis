@@ -5,7 +5,6 @@ import { toast } from 'react-toastify'
 import {USERS_IMG_API} from '../config'
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
@@ -80,7 +79,6 @@ const RegisterPage = ({history}) => {
     const[fileName, setFileName] =  useState()
 
     const fileSelectedHandler = event => {
-        console.log(event.target.files[0])
         setUser({...user,picture:event.target.files[0]}) 
         setFileName(event.target.files[0].name)
 
@@ -144,7 +142,7 @@ const RegisterPage = ({history}) => {
 
                 // <form className={classes.root} onSubmit={handleSubmit} encType="multipart/form-data">   
 <Container component="main" maxWidth="xs">
-<CssBaseline />
+
 <div className={classes.paper}>
   <Avatar className={classes.avatar}>
     <LockOutlinedIcon />
@@ -251,12 +249,7 @@ const RegisterPage = ({history}) => {
 
 
     </Grid>
-      <Grid item xs={12}>
-        <FormControlLabel
-          control={<Checkbox value="allowExtraEmails" color="primary" />}
-          label="Je veux recevoir des photos des chats via email"
-        />
-      </Grid>
+
 
 
     </Grid>

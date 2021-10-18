@@ -42,8 +42,6 @@ const App = () => {
     setIsAuthenticated: setIsAuthenticated,
   };
 
-  console.log('isAuth App;: ', isAuthenticated);
-
   return (
         <BrowserRouter>
     <AuthContext.Provider value={contextValue}>

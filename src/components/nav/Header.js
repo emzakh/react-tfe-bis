@@ -70,8 +70,8 @@ const Header = () => {
   useEffect(() => {
     axios
       .all([
-        axios.get("http://localhost:8000/api/produits"),
-        axios.get("http://localhost:8000/api/recettes"),
+        axios.get("http://hildegarde.massimino.be/api/produits"),
+        axios.get("http://hildegarde.massimino.be/api/recettes"),
       ])
       .then(
         axios.spread((obj1, obj2) => {
@@ -180,14 +180,14 @@ const Header = () => {
                         user.roles.includes("ROLE_ADMIN") ? (
                           <MenuItem onClick={handleClose}>
                             <a
-                              href="http://localhost:8000/admin"
+                              href="http://hildegarde.massimino.be/admin"
                               onClick={menuToggleHandler}
                             >
                               Administration
                             </a>
                           </MenuItem>
                         ) : (
-                          <h2>pas admin</h2>
+                          <h2></h2>
                         )
 
                         // if(user.roles.indexOf("ROLE_ADMIN")!= -1){
